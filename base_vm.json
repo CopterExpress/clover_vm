@@ -1,0 +1,42 @@
+{
+  "variables" : {
+    "user": "clever",
+    "password": "clever",
+    "vm-name": "clever-devel"
+  },
+  "builders": [{
+    "type": "virtualbox-iso",
+    "vm_name": "{{user `vm-name`}}",
+    "guest_os_type": "Ubuntu_64",
+    "format": "ova",
+    "guest_additions_mode": "upload",
+    "disk_size": "30000",
+    "hard_drive_interface": "sata",
+    "vboxmanage": [
+      ["modifyvm", "{{.Name}}", "--memory", "4096", "--vram", "128", "--mouse", "usbtablet", "--accelerate3d", "on", "--apic", "on", "--rtcuseutc", "on", "--graphicscontroller", "vmsvga"],
+      ["storageattach", "{{.Name}}", "--storagectl", "SATA Controller", "--port", "0", "--nonrotational", "on", "--discard", "on"]
+    ],
+
+    "iso_url": "http://archive.ubuntu.com/ubuntu/dists/bionic/main/installer-amd64/current/images/netboot/mini.iso",
+    "iso_checksum": "bed8a55ae2a657f8349fe3271097cff3a5b8c3d1048cf258568f1601976fa30d",
+    "iso_checksum_type": "sha256",
+
+    "ssh_password": "{{user `password`}}",
+    "ssh_username": "{{user `user`}}",
+    "ssh_wait_timeout": "10000s",
+
+    "boot_command": [
+      "<esc><wait>",
+      "install auto=true priority=critical url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed.cfg",
+      "<enter><wait>"
+    ],
+
+    "boot_wait": "4s",
+    "http_directory": "http",
+    "shutdown_command": "echo {{user `password`}} | sudo -S shutdown -P now",
+
+    "vboxmanage_post": [
+      ["modifyhd", "output-virtualbox-iso/{{.Name}}.vdi", "--compact"]
+    ]
+  }]
+}
