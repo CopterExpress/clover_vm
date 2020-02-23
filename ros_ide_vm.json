@@ -1,0 +1,50 @@
+{
+  "variables": {
+    "user": "clever",
+    "password": "clever",
+    "vm-name": "clever-devel",
+    "scriptsDir": "scripts"
+  },
+  "builders": [{
+    "type": "virtualbox-ovf",
+    "vm_name": "{{user `vm-name`}}",
+    "source_path": "output-virtualbox-iso/{{user `vm-name`}}.ova",
+    "format": "ova",
+
+    "vboxmanage": [
+      ["modifyvm", "{{.Name}}", "--memory", "4096", "--vram", "128", "--mouse", "usbtablet", "--rtcuseutc", "on", "--usb", "on", "--usbxhci", "on"],
+      ["storageattach", "{{.Name}}", "--storagectl", "SATA Controller", "--port", "0", "--nonrotational", "on", "--discard", "on"]
+    ],
+    "import_opts": "importtovdi",
+
+    "ssh_username": "{{user `user`}}",
+    "ssh_password": "{{user `password`}}",
+    "ssh_wait_timeout": "10000s",
+
+    "boot_wait": "30s",
+
+    "virtualbox_version_file": ".vbox_version",
+
+    "shutdown_command": "echo '{{user `password`}}' | sudo -S shutdown -P now"
+  }],
+  "provisioners": [{
+    "type": "shell",
+    "script": "scripts/installGuestAdditions.sh",
+    "execute_command": "echo '{{user `password`}}' | {{.Vars}} sudo -E -S sh '{{.Path}}'"
+  },
+  {
+    "type": "shell",
+    "script": "scripts/installRos.sh",
+    "execute_command": "echo '{{user `password`}}' | {{.Vars}} sudo -E -S sh '{{.Path}}'"
+  },
+  {
+    "type": "shell",
+    "script": "scripts/installVsCode.sh",
+    "execute_command": "echo '{{user `password`}}' | {{.Vars}} sudo -E -S sh '{{.Path}}'"
+  },
+  {
+    "type": "shell",
+    "script": "scripts/installRosUser.sh"
+  }
+]
+}
