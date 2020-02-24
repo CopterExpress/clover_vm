@@ -2,6 +2,5 @@
 
 sudo apt update
 sudo apt install -y build-essential make perl
-sudo mount -o loop,ro /home/clever/VBoxGuestAdditions.iso /mnt
-sudo /mnt/VBoxLinuxAdditions.run
-sudo umount /mnt
+# virtualbox is still terrible, let's target vmware
+sudo apt install -y open-vm-tools
