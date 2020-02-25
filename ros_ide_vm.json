@@ -29,22 +29,7 @@
   }],
   "provisioners": [{
     "type": "shell",
-    "script": "scripts/installGuestAdditions.sh",
-    "execute_command": "echo '{{user `password`}}' | {{.Vars}} sudo -E -S sh '{{.Path}}'"
-  },
-  {
-    "type": "shell",
-    "script": "scripts/installRos.sh",
-    "execute_command": "echo '{{user `password`}}' | {{.Vars}} sudo -E -S sh '{{.Path}}'"
-  },
-  {
-    "type": "shell",
-    "script": "scripts/installVsCode.sh",
-    "execute_command": "echo '{{user `password`}}' | {{.Vars}} sudo -E -S sh '{{.Path}}'"
-  },
-  {
-    "type": "shell",
-    "script": "scripts/installRosUser.sh"
-  }
-]
+    "script": "scripts/installSoftware.sh",
+    "execute_command": "PASSWORD='{{user `password`}}' bash '{{.Path}}'"
+  }]
 }
