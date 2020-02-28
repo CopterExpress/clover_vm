@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=QGroundControl
+GenericName=Ground Control Station
+Comment=UAS ground control station
+Icon=/home/clever/Pictures/qgroundcontrol.png
+Exec=/home/clever/QGroundControl.AppImage
+Terminal=false
+Categories=Utility;
