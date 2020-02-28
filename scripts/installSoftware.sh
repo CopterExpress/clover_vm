@@ -25,6 +25,9 @@ echo "${PASSWORD}" | sudo -E -S sh -c '${HOME}/Firmware/Tools/setup/ubuntu.sh'
 echo "${PASSWORD}" | sudo -E -S sh -c 'echo "2" | update-alternatives --config java'
 echo "${PASSWROD}" | sudo -E -S sed -i -e '/^assistive_technologies=/s/^/#/' /etc/java-*-openjdk/accessibility.properties
 
+echo "--- Prebuilding PX4 SITL configuration"
+make -C /home/clever/Firmware px4_sitl
+
 echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 
 echo "--- Installing Visual Studio Code"
