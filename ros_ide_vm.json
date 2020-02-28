@@ -35,6 +35,11 @@
   },
   {
     "type": "file",
+    "source": "{{user `assetsDir`}}/pictures/",
+    "destination": "/home/clever/Pictures"
+  },
+  {
+    "type": "file",
     "source": "{{user `assetsDir`}}/desktop/",
     "destination": "/home/clever/Desktop"
   },

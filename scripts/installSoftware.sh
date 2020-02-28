@@ -66,7 +66,9 @@ echo "${PASSWORD}" | sudo -E -S sh -c 'apt update; apt install -y firefox'
 
 echo "--- Personalizing VM"
 echo "${PASSWORD}" | sudo -E -S sh -c 'mv /etc/xdg/autostart/light-locker.desktop /etc/xdg/autostart/light-locker.desktop.old'
-echo "${PASSRORD}" | sudo -E -S sh -c 'cp /usr/share/xfce4/backdrops/xubuntu-wallpaper.png /usr/share/xfce4/backdrops/xubuntu-wallpaper-old.png; cp /home/clever/Pictures/Logo_COEX_2019_white_on_black.png /usr/share/xfce4/backdrops/xubuntu-wallpaper.png'
+echo "${PASSWORD}" | sudo -E -S sh -c 'cp /usr/share/xfce4/backdrops/xubuntu-wallpaper.png /usr/share/xfce4/backdrops/xubuntu-wallpaper-old.png; cp /home/clever/Pictures/Logo_COEX_2019_white_on_black.png /usr/share/xfce4/backdrops/xubuntu-wallpaper.png'
+echo "${PASSWORD}" | sudo -E -S sh -c 'hostnamectl set-hostname clever-dev'
+chmod a+x /home/clever/Desktop/*
 
 echo "--- Cleaning up"
 echo "${PASSWORD}" | sudo -E -S sh -c 'apt-get -y autoremove; apt-get -y autoclean; apt-get -y clean; fstrim -v /'
