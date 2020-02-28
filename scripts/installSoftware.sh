@@ -3,6 +3,9 @@
 echo "--- Current environment:"
 /usr/bin/env
 
+echo "Enabling passwordless sudo"
+echo "${PASSWORD}" | sudo -E -S sh -c 'echo "clever ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'
+
 echo "--- Installing open-vm-tools"
 
 echo "${PASSWORD}" | sudo -E -S sh -c 'apt update; apt install -y open-vm-tools'
@@ -20,6 +23,7 @@ echo "--- Downloading PX4 and installing its dependencies"
 git clone -b v1.10.0-clever https://github.com/CopterExpress/Firmware ${HOME}/Firmware
 echo "${PASSWORD}" | sudo -E -S sh -c '${HOME}/Firmware/Tools/setup/ubuntu.sh'
 echo "${PASSWORD}" | sudo -E -S sh -c 'echo "2" | update-alternatives --config java'
+echo "${PASSWROD}" | sudo -E -S sed -i -e '/^assistive_technologies=/s/^/#/' /etc/java-*-openjdk/accessibility.properties
 
 echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 
@@ -42,7 +46,9 @@ echo "--- Cloning and installing Clever packages"
 mkdir -p ${HOME}/catkin_ws/src
 git clone -b v0.19 https://github.com/CopterExpress/clever ${HOME}/catkin_ws/src/clever
 git clone https://github.com/CopterExpress/ros_led ${HOME}/catkin_ws/src/ros_led
-echo "${PASSWORD}" | sudo -E -S sh -c 'rosdep install --from-paths ${HOME}/catkin_ws/src --ignore-src --rosdistro melodic'
+# FIXME: rosdep is not initialized for root, maybe running without sudo?
+#echo "${PASSWORD}" | sudo -E -S sh -c 'rosdep install --from-paths ${HOME}/catkin_ws/src --ignore-src --rosdistro melodic -y'
+rosdep install --from-paths ${HOME}/catkin_ws/src --ignore-src --rosdistro melodic -y
 curl https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh -o ${HOME}/install_geographiclib_datasets.sh
 chmod a+x ${HOME}/install_geographiclib_datasets.sh
 echo "${PASSWORD}" | sudo -E -S sh -c '${HOME}/install_geographiclib_datasets.sh'
