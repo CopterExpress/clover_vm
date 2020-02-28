@@ -3,7 +3,8 @@
     "user": "clever",
     "password": "clever",
     "vm-name": "clever-devel",
-    "scriptsDir": "scripts"
+    "scriptsDir": "scripts",
+    "assetsDir": "assets"
   },
   "builders": [{
     "type": "virtualbox-ovf",
@@ -28,6 +29,16 @@
     "shutdown_command": "echo '{{user `password`}}' | sudo -S shutdown -P now"
   }],
   "provisioners": [{
+    "type": "file",
+    "source": "{{user `assetsDir`}}/background/",
+    "destination": "/home/clever/Pictures"
+  },
+  {
+    "type": "file",
+    "source": "{{user `assetsDir`}}/desktop/",
+    "destination": "/home/clever/Desktop"
+  },
+  {
     "type": "shell",
     "script": "scripts/installSoftware.sh",
     "execute_command": "PASSWORD='{{user `password`}}' bash '{{.Path}}'"

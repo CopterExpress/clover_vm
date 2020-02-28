@@ -8,7 +8,7 @@ echo "${PASSWORD}" | sudo -E -S sh -c 'echo "clever ALL=(ALL) NOPASSWD:ALL" >> /
 
 echo "--- Installing open-vm-tools"
 
-echo "${PASSWORD}" | sudo -E -S sh -c 'apt update; apt install -y open-vm-tools'
+echo "${PASSWORD}" | sudo -E -S sh -c 'apt update; apt install -y open-vm-tools open-vm-tools-desktop'
 
 echo "--- Installing ROS desktop packages"
 
@@ -60,6 +60,13 @@ echo "${PASSWORD}" | sudo -E -S sh -c "usermod -a -G dialout $USER"
 echo "${PASSWORD}" | sudo -E -S sh -c 'apt remove -y modemmanager; apt install -y gstreamer1.0-plugins-bad gstreamer1.0-libav'
 curl https://s3-us-west-2.amazonaws.com/qgroundcontrol/latest/QGroundControl.AppImage -o ${HOME}/QGroundControl.AppImage
 chmod a+x ${HOME}/QGroundControl.AppImage
+
+echo "--- Installing Firefox web browser"
+echo "${PASSWORD}" | sudo -E -S sh -c 'apt update; apt install -y firefox'
+
+echo "--- Personalizing VM"
+echo "${PASSWORD}" | sudo -E -S sh -c 'mv /etc/xdg/autostart/light-locker.desktop /etc/xdg/autostart/light-locker.desktop.old'
+echo "${PASSRORD}" | sudo -E -S sh -c 'cp /usr/share/xfce4/backdrops/xubuntu-wallpaper.png /usr/share/xfce4/backdrops/xubuntu-wallpaper-old.png; cp /home/clever/Pictures/Logo_COEX_2019_white_on_black.png /usr/share/xfce4/backdrops/xubuntu-wallpaper.png'
 
 echo "--- Cleaning up"
 echo "${PASSWORD}" | sudo -E -S sh -c 'apt-get -y autoremove; apt-get -y autoclean; apt-get -y clean; fstrim -v /'
