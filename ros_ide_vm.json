@@ -11,6 +11,7 @@
     "vm_name": "{{user `vm-name`}}",
     "source_path": "output-virtualbox-iso/{{user `vm-name`}}.ova",
     "format": "ova",
+    "guest_additions_mode": "disable",
 
     "vboxmanage": [
       ["modifyvm", "{{.Name}}", "--memory", "4096", "--vram", "128", "--mouse", "usbtablet", "--rtcuseutc", "on", "--usb", "on", "--usbxhci", "on"],
