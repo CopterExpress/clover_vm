@@ -67,6 +67,9 @@ chmod a+x ${HOME}/QGroundControl.AppImage
 echo "--- Installing Firefox web browser"
 echo "${PASSWORD}" | sudo -E -S sh -c 'apt update; apt install -y firefox'
 
+echo "--- Installing additional packages"
+sudo -E sh -c 'apt update; apt install -y sshfs'
+
 echo "--- Personalizing VM"
 echo "${PASSWORD}" | sudo -E -S sh -c 'mv /etc/xdg/autostart/light-locker.desktop /etc/xdg/autostart/light-locker.desktop.old'
 echo "${PASSWORD}" | sudo -E -S sh -c 'cp /usr/share/xfce4/backdrops/xubuntu-wallpaper.png /usr/share/xfce4/backdrops/xubuntu-wallpaper-old.png; cp /home/clever/Pictures/Logo_COEX_2019_white_on_black.png /usr/share/xfce4/backdrops/xubuntu-wallpaper.png'
