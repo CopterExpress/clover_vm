@@ -14,7 +14,7 @@
     "guest_additions_mode": "disable",
 
     "vboxmanage": [
-      ["modifyvm", "{{.Name}}", "--memory", "4096", "--vram", "128", "--mouse", "usbtablet", "--rtcuseutc", "on", "--usb", "on", "--usbxhci", "on"],
+      ["modifyvm", "{{.Name}}", "--memory", "8192", "--vram", "128", "--mouse", "usbtablet", "--rtcuseutc", "on", "--usb", "on", "--usbxhci", "on"],
       ["storageattach", "{{.Name}}", "--storagectl", "SATA Controller", "--port", "0", "--nonrotational", "on", "--discard", "on"]
     ],
     "import_opts": "importtovdi",
@@ -27,7 +27,10 @@
 
     "virtualbox_version_file": ".vbox_version",
 
-    "shutdown_command": "echo '{{user `password`}}' | sudo -S shutdown -P now"
+    "shutdown_command": "echo '{{user `password`}}' | sudo -S shutdown -P now",
+    "vboxmanage_post": [
+      ["modifyvm", "{{.Name}}", "--memory", "2048"]
+    ]
   }],
   "provisioners": [{
     "type": "file",
