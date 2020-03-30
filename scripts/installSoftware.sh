@@ -29,9 +29,11 @@ echo "--- Prebuilding PX4 SITL configuration"
 make -C /home/clever/Firmware px4_sitl
 echo "--- Patching and building gazebo plugins for SITL"
 sed -i 's/TRUE/true/g' /home/clever/Firmware/Tools/sitl_gazebo/include/gazebo_opticalflow_plugin.h
+echo 'export SVGA_VGPU10=0' >> /home/clever/Firmware/Tools/setup_gazebo.bash
 make -C /home/clever/Firmware px4_sitl sitl_gazebo
 
 echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+echo "source /home/clever/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
 echo "--- Installing Visual Studio Code"
 
