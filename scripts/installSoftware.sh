@@ -27,6 +27,9 @@ echo "${PASSWROD}" | sudo -E -S sed -i -e '/^assistive_technologies=/s/^/#/' /et
 
 echo "--- Prebuilding PX4 SITL configuration"
 make -C /home/clever/Firmware px4_sitl
+echo "--- Patching and building gazebo plugins for SITL"
+sed -i 's/TRUE/true' /home/clever/Firmware/Tools/sitl_gazebo/include/gazebo_opticalflow_plugin.h
+make -C /home/clever/Firmware px4_sitl sitl_gazebo
 
 echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 
@@ -68,7 +71,7 @@ echo "--- Installing Firefox web browser"
 echo "${PASSWORD}" | sudo -E -S sh -c 'apt update; apt install -y firefox'
 
 echo "--- Installing additional packages"
-sudo -E sh -c 'apt update; apt install -y sshfs'
+sudo -E sh -c 'apt update; apt install -y sshfs gvfs-fuse gvfs-backends'
 
 echo "--- Personalizing VM"
 echo "${PASSWORD}" | sudo -E -S sh -c 'mv /etc/xdg/autostart/light-locker.desktop /etc/xdg/autostart/light-locker.desktop.old'
