@@ -20,7 +20,7 @@ echo "${PASSWORD}" | sudo -E -S sh -c 'rosdep init'
 rosdep update
 
 echo "--- Downloading PX4 and installing its dependencies"
-git clone -b v1.10.0-clever https://github.com/CopterExpress/Firmware ${HOME}/Firmware
+git clone -b v1.10.1-clever https://github.com/CopterExpress/Firmware ${HOME}/Firmware
 echo "${PASSWORD}" | sudo -E -S sh -c '${HOME}/Firmware/Tools/setup/ubuntu.sh'
 echo "${PASSWORD}" | sudo -E -S sh -c 'echo "2" | update-alternatives --config java'
 echo "${PASSWROD}" | sudo -E -S sed -i -e '/^assistive_technologies=/s/^/#/' /etc/java-*-openjdk/accessibility.properties
@@ -28,7 +28,7 @@ echo "${PASSWROD}" | sudo -E -S sed -i -e '/^assistive_technologies=/s/^/#/' /et
 echo "--- Prebuilding PX4 SITL configuration"
 make -C /home/clever/Firmware px4_sitl
 echo "--- Patching and building gazebo plugins for SITL"
-sed -i 's/TRUE/true' /home/clever/Firmware/Tools/sitl_gazebo/include/gazebo_opticalflow_plugin.h
+sed -i 's/TRUE/true/g' /home/clever/Firmware/Tools/sitl_gazebo/include/gazebo_opticalflow_plugin.h
 make -C /home/clever/Firmware px4_sitl sitl_gazebo
 
 echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
