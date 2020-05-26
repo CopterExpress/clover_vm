@@ -32,7 +32,6 @@ sed -i 's/TRUE/true/g' /home/clever/Firmware/Tools/sitl_gazebo/include/gazebo_op
 echo 'export SVGA_VGPU10=0' >> /home/clever/Firmware/Tools/setup_gazebo.bash
 
 echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
-echo "source /home/clever/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
 echo "--- Installing Visual Studio Code"
 
@@ -61,6 +60,7 @@ chmod a+x ${HOME}/install_geographiclib_datasets.sh
 echo "${PASSWORD}" | sudo -E -S sh -c '${HOME}/install_geographiclib_datasets.sh'
 source /opt/ros/melodic/setup.bash
 cd ${HOME}/catkin_ws && catkin_make
+echo "source /home/clever/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
 echo "--- Installing QGroundControl"
 echo "${PASSWORD}" | sudo -E -S sh -c "usermod -a -G dialout $USER"
