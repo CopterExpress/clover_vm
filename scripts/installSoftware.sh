@@ -50,7 +50,7 @@ code --install-extension eamodio.gitlens
 
 echo "--- Cloning and installing Clever packages"
 mkdir -p ${HOME}/catkin_ws/src
-git clone -b v0.20-rc.1 https://github.com/CopterExpress/clover ${HOME}/catkin_ws/src/clover
+git clone -b clover_description https://github.com/CopterExpress/clover ${HOME}/catkin_ws/src/clover
 git clone https://github.com/CopterExpress/ros_led ${HOME}/catkin_ws/src/ros_led
 # FIXME: rosdep is not initialized for root, maybe running without sudo?
 #echo "${PASSWORD}" | sudo -E -S sh -c 'rosdep install --from-paths ${HOME}/catkin_ws/src --ignore-src --rosdistro melodic -y'
