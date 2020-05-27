@@ -47,6 +47,9 @@ code --install-extension ms-vscode.cmake-tools
 code --install-extension ms-vscode.cpptools
 code --install-extension streetsidesoftware.code-spell-checker
 code --install-extension eamodio.gitlens
+echo "--- Installing pylint"
+/usr/bin/python2.7 -m pip install -U "pylint<2.0.0" --user
+/usr/bin/python3.6 -m pip install -U pylint --user
 
 echo "--- Cloning and installing Clever packages"
 mkdir -p ${HOME}/catkin_ws/src
