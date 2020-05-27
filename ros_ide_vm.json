@@ -48,6 +48,11 @@
     "destination": "/home/clever/Desktop"
   },
   {
+    "type": "file",
+    "source": "{{user `assetsDir`}}/vscode/",
+    "destination": "/home/clever/.config/Code/User/"
+  },
+  {
     "type": "shell",
     "script": "scripts/installSoftware.sh",
     "execute_command": "PASSWORD='{{user `password`}}' bash '{{.Path}}'"
