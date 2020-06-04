@@ -31,6 +31,8 @@ echo "--- Prebuilding PX4 SITL configuration"
 make -C /home/clever/Firmware px4_sitl
 echo "--- Patching gazebo plugins for SITL"
 sed -i 's/TRUE/true/g' /home/clever/Firmware/Tools/sitl_gazebo/include/gazebo_opticalflow_plugin.h
+# workaround for frames being deleted
+sed -i 's/MAV_FRAME_VISION_NED/16 \/\*MAV_FRAME_VISION_NED\*\//g' src/gazebo_mavlink_interface.cpp
 echo 'export SVGA_VGPU10=0' >> /home/clever/Firmware/Tools/setup_gazebo.bash
 
 echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
@@ -57,8 +59,9 @@ echo "--- Cloning and installing Clever packages"
 mkdir -p ${HOME}/catkin_ws/src
 git clone -b clover_description https://github.com/CopterExpress/clover ${HOME}/catkin_ws/src/clover
 git clone https://github.com/CopterExpress/ros_led ${HOME}/catkin_ws/src/ros_led
-# FIXME: rosdep is not initialized for root, maybe running without sudo?
-#echo "${PASSWORD}" | sudo -E -S sh -c 'rosdep install --from-paths ${HOME}/catkin_ws/src --ignore-src --rosdistro melodic -y'
+# Make PX4 and Gazebo plugins visible in the workspace
+ln -s ${HOME}/Firmware ${HOME}/catkin_ws/src/Firmware
+ln -s ${HOME}/Firmware/Tools/sitl_gazebo ${HOME}/catkin_ws/src/sitl_gazebo
 rosdep install --from-paths ${HOME}/catkin_ws/src --ignore-src --rosdistro melodic -y
 curl https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh -o ${HOME}/install_geographiclib_datasets.sh
 chmod a+x ${HOME}/install_geographiclib_datasets.sh
