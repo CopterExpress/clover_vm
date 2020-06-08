@@ -70,6 +70,9 @@ source /opt/ros/melodic/setup.bash
 cd ${HOME}/catkin_ws && catkin_make
 echo "source /home/clever/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
+echo "--- Enabling roscore service"
+sudo systemctl enable roscore.service
+
 echo "--- Installing QGroundControl"
 echo "${PASSWORD}" | sudo -E -S sh -c "usermod -a -G dialout $USER"
 echo "${PASSWORD}" | sudo -E -S sh -c 'apt remove -y modemmanager; apt install -y gstreamer1.0-plugins-bad gstreamer1.0-libav'
