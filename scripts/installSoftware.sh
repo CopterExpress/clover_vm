@@ -85,7 +85,7 @@ echo "--- Installing Firefox web browser"
 echo "${PASSWORD}" | sudo -E -S sh -c 'apt update; apt install -y firefox'
 
 echo "--- Installing additional packages"
-sudo -E sh -c 'apt update; apt install -y sshfs gvfs-fuse gvfs-backends python3-opencv byobu ipython ipython3 byobu nmap lsof tmux vim'
+sudo -E sh -c 'apt update; apt install -y sshfs gvfs-fuse gvfs-backends python3-opencv byobu ipython ipython3 byobu nmap lsof tmux vim ros-melodic-rqt-multiplot'
 
 echo "--- Personalizing VM"
 echo "${PASSWORD}" | sudo -E -S sh -c 'mv /etc/xdg/autostart/light-locker.desktop /etc/xdg/autostart/light-locker.desktop.old'
