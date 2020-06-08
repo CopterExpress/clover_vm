@@ -86,6 +86,7 @@ echo "--- Personalizing VM"
 echo "${PASSWORD}" | sudo -E -S sh -c 'mv /etc/xdg/autostart/light-locker.desktop /etc/xdg/autostart/light-locker.desktop.old'
 echo "${PASSWORD}" | sudo -E -S sh -c 'cp /usr/share/xfce4/backdrops/xubuntu-wallpaper.png /usr/share/xfce4/backdrops/xubuntu-wallpaper-old.png; cp /home/clever/Pictures/Logo_COEX_2019_white_on_black.png /usr/share/xfce4/backdrops/xubuntu-wallpaper.png'
 echo "${PASSWORD}" | sudo -E -S sh -c 'hostnamectl set-hostname clever-dev; sed -i "s/ubuntu/clever-dev clever-dev.local/g" /etc/hosts'
+echo "export ROS_HOSTNAME=\`hostname\`.local" >> ${HOME}/.bashrc
 chmod a+x /home/clever/Desktop/*
 
 echo "--- Cleaning up"
