@@ -30,9 +30,9 @@ echo "${PASSWROD}" | sudo -E -S sed -i -e '/^assistive_technologies=/s/^/#/' /et
 echo "--- Prebuilding PX4 SITL configuration"
 make -C /home/clever/Firmware px4_sitl
 echo "--- Patching gazebo plugins for SITL"
-sed -i 's/TRUE/true/g' /home/clever/Firmware/Tools/sitl_gazebo/include/gazebo_opticalflow_plugin.h
+sed -i 's/TRUE/true/g' ${HOME}/Firmware/Tools/sitl_gazebo/include/gazebo_opticalflow_plugin.h
 # workaround for frames being deleted
-sed -i 's/MAV_FRAME_VISION_NED/16 \/\*MAV_FRAME_VISION_NED\*\//g' src/gazebo_mavlink_interface.cpp
+sed -i 's/MAV_FRAME_VISION_NED/16 \/\*MAV_FRAME_VISION_NED\*\//g' ${HOME}/Firmware/Tools/sitl_gazebo/src/gazebo_mavlink_interface.cpp
 echo 'export SVGA_VGPU10=0' >> /home/clever/Firmware/Tools/setup_gazebo.bash
 
 echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
@@ -85,7 +85,7 @@ sudo -E sh -c 'apt update; apt install -y sshfs gvfs-fuse gvfs-backends python3-
 echo "--- Personalizing VM"
 echo "${PASSWORD}" | sudo -E -S sh -c 'mv /etc/xdg/autostart/light-locker.desktop /etc/xdg/autostart/light-locker.desktop.old'
 echo "${PASSWORD}" | sudo -E -S sh -c 'cp /usr/share/xfce4/backdrops/xubuntu-wallpaper.png /usr/share/xfce4/backdrops/xubuntu-wallpaper-old.png; cp /home/clever/Pictures/Logo_COEX_2019_white_on_black.png /usr/share/xfce4/backdrops/xubuntu-wallpaper.png'
-echo "${PASSWORD}" | sudo -E -S sh -c 'hostnamectl set-hostname clever-dev'
+echo "${PASSWORD}" | sudo -E -S sh -c 'hostnamectl set-hostname clever-dev; sed -i "s/ubuntu/clever-dev clever-dev.local/g" /etc/hosts'
 chmod a+x /home/clever/Desktop/*
 
 echo "--- Cleaning up"
