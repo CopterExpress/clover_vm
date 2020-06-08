@@ -71,6 +71,8 @@ cd ${HOME}/catkin_ws && catkin_make
 echo "source /home/clever/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
 echo "--- Enabling roscore service"
+sed -i "s/pi/${USER}/g" ${HOME}/catkin_ws/src/clover/builder/assets/roscore.service
+sudo cp ${HOME}/catkin_ws/src/clover/builder/assets/roscore.service /etc/systemd/system
 sudo systemctl enable roscore.service
 
 echo "--- Installing QGroundControl"

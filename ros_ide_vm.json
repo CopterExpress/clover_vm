@@ -48,11 +48,6 @@
     "destination": "/home/clever/Desktop"
   },
   {
-    "type": "file",
-    "source": "{{user `assetsDir`}}/services/",
-    "destination": "/etc/systemd/system"
-  },
-  {
     "type": "shell",
     "script": "scripts/installSoftware.sh",
     "execute_command": "PASSWORD='{{user `password`}}' bash '{{.Path}}'"
