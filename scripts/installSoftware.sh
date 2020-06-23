@@ -83,6 +83,12 @@ chmod a+x ${HOME}/QGroundControl.AppImage
 echo "--- Installing Firefox web browser"
 echo "${PASSWORD}" | sudo -E -S sh -c 'apt update; apt install -y firefox'
 
+echo "--- Installing Monkey web server"
+sudo apt install -y /tmp/packages/monkey_1.6.9-1_amd64.deb
+sed "s/pi/${USER}/g" ${HOME}/catkin_ws/src/clover/builder/assets/monkey | sudo tee /etc/monkey/sites/default
+sudo cp ${HOME}/catkin_ws/src/clover/builder/assets/monkey.service /etc/systemd/system/monkey.service
+sudo systemctl enable monkey
+
 echo "--- Installing additional packages"
 sudo -E sh -c 'apt update; apt install -y sshfs gvfs-fuse gvfs-backends python3-opencv byobu ipython ipython3 byobu nmap lsof tmux vim ros-melodic-rqt-multiplot'
 
