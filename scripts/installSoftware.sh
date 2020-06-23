@@ -28,11 +28,10 @@ echo "${PASSWORD}" | sudo -E -S sh -c 'echo "2" | update-alternatives --config j
 echo "${PASSWROD}" | sudo -E -S sed -i -e '/^assistive_technologies=/s/^/#/' /etc/java-*-openjdk/accessibility.properties
 
 echo "--- Prebuilding PX4 SITL configuration"
-make -C /home/clever/Firmware px4_sitl
+make -C ${HOME}/Firmware px4_sitl
 echo "--- Patching gazebo plugins for SITL"
-sed -i 's/TRUE/true/g' ${HOME}/Firmware/Tools/sitl_gazebo/include/gazebo_opticalflow_plugin.h
-# workaround for frames being deleted
-sed -i 's/MAV_FRAME_VISION_NED/16 \/\*MAV_FRAME_VISION_NED\*\//g' ${HOME}/Firmware/Tools/sitl_gazebo/src/gazebo_mavlink_interface.cpp
+cd ${HOME}/Tools/sitl_gazebo
+patch -p1 < /tmp/patches/sitl_gazebo.patch
 echo 'export SVGA_VGPU10=0' >> /home/clever/Firmware/Tools/setup_gazebo.bash
 
 echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
