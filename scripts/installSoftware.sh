@@ -30,7 +30,7 @@ echo "${PASSWROD}" | sudo -E -S sed -i -e '/^assistive_technologies=/s/^/#/' /et
 echo "--- Prebuilding PX4 SITL configuration"
 make -C ${HOME}/Firmware px4_sitl
 echo "--- Patching gazebo plugins for SITL"
-cd ${HOME}/Tools/sitl_gazebo
+cd ${HOME}/Firmware/Tools/sitl_gazebo
 patch -p1 < /tmp/patches/sitl_gazebo.patch
 echo 'export SVGA_VGPU10=0' >> /home/clever/Firmware/Tools/setup_gazebo.bash
 
