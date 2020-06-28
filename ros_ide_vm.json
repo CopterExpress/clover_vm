@@ -30,6 +30,10 @@
     "shutdown_command": "echo '{{user `password`}}' | sudo -S shutdown -P now",
     "vboxmanage_post": [
       ["modifyvm", "{{.Name}}", "--memory", "2048"]
+    ],
+    "export_opts": [
+      "--ovf10",
+      "--manifest"
     ]
   }],
   "provisioners": [{
