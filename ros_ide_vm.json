@@ -14,7 +14,7 @@
     "guest_additions_mode": "disable",
 
     "vboxmanage": [
-      ["modifyvm", "{{.Name}}", "--memory", "8192", "--vram", "128", "--mouse", "usbtablet", "--rtcuseutc", "on", "--usb", "on", "--usbxhci", "on"],
+      ["modifyvm", "{{.Name}}", "--memory", "8192", "--vram", "128", "--mouse", "usbtablet", "--rtcuseutc", "on", "--usb", "on", "--usbxhci", "on", "--nictype1", "virtio"],
       ["storageattach", "{{.Name}}", "--storagectl", "SATA Controller", "--port", "0", "--nonrotational", "on", "--discard", "on"]
     ],
     "import_opts": "importtovdi",
