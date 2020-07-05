@@ -2,6 +2,6 @@ language: generic
 dist: bionic
 
 before_install:
-  - wget https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add - && sudo sh -c "echo deb https://download.virtualbox.org/virtualbox/debian bionic contrib >> /etc/apt/sources.list" && sudo apt-get update && sudo apt-get install build-essential gcc make linux-headers-$(uname -r) virtualbox-6.0 && sudo usermod -aG vboxusers $(whoami)
+  - wget https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add - && sudo sh -c "echo deb https://download.virtualbox.org/virtualbox/debian bionic contrib >> /etc/apt/sources.list" && sudo apt-get update && sudo apt-get install build-essential gcc make linux-headers-$(uname -r) virtualbox-6.1 && sudo usermod -aG vboxusers $(whoami)
 script:
   - ./build.sh
