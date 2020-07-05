@@ -16,7 +16,7 @@
     "headless": "true",
 
     "vboxmanage": [
-      ["modifyvm", "{{.Name}}", "--memory", "6144", "--vram", "128", "--mouse", "usbtablet", "--rtcuseutc", "on", "--usb", "on", "--usbxhci", "on", "--nictype1", "virtio"],
+      ["modifyvm", "{{.Name}}", "--memory", "6144", "--vram", "128", "--mouse", "usbtablet", "--rtcuseutc", "on", "--nictype1", "virtio"],
       ["storageattach", "{{.Name}}", "--storagectl", "SATA Controller", "--port", "0", "--nonrotational", "on", "--discard", "on"]
     ],
     "import_opts": "importtovdi",
