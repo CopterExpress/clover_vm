@@ -8,6 +8,9 @@ echo "--- Current environment:"
 echo "Enabling passwordless sudo"
 echo "${PASSWORD}" | sudo -E -S sh -c 'echo "clever ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'
 
+echo "--- Allowing apt to perform its updates"
+sudo -E sh -c 'apt update; while fuser /var/lib/dpkg/lock ; do sleep 0.5 ; done'
+
 echo "--- Installing open-vm-tools"
 
 echo "${PASSWORD}" | sudo -E -S sh -c 'apt update; apt install -y open-vm-tools open-vm-tools-desktop'
