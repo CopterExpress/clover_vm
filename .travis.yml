@@ -14,7 +14,7 @@ deploy:
   provider: s3
   access_key_id: XOJXX4IOM66XN7VZAFYX
   secret_access_key: $S3_SECRET_KEY
-  bucket: clovervmci
+  bucket: clovervm
   local-dir: output-virtualbox-ovf
   upload-dir: ci-builds
   acl: public_read
