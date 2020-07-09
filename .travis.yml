@@ -1,8 +1,24 @@
 language: generic
 dist: bionic
-
 before_install:
-  - wget https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add - && sudo sh -c "echo deb https://download.virtualbox.org/virtualbox/debian bionic contrib >> /etc/apt/sources.list" && sudo apt-get update && sudo apt-get install build-essential gcc make linux-headers-$(uname -r) virtualbox-6.1 && sudo usermod -aG vboxusers $(whoami)
-  - mkdir output-virtualbox-iso && pushd output-virtualbox-iso && wget https://github.com/sfalexrog/clever_vm/releases/download/v0_base_vm/clever-devel.ova && popd
+- wget https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key
+  add - && sudo sh -c "echo deb https://download.virtualbox.org/virtualbox/debian
+  bionic contrib >> /etc/apt/sources.list" && sudo apt-get update && sudo apt-get
+  install build-essential gcc make linux-headers-$(uname -r) virtualbox-6.1 && sudo
+  usermod -aG vboxusers $(whoami)
+- mkdir output-virtualbox-iso && pushd output-virtualbox-iso && wget https://github.com/sfalexrog/clever_vm/releases/download/v0_base_vm/clever-devel.ova
+  && popd
 script:
-  - ./build.sh
+- "./build.sh"
+deploy:
+  provider: s3
+  access_key_id: XOJXX4IOM66XN7VZAFYX
+  secret_access_key:
+    secure: ZxFeeG+kvYWsWagQHgST5szlNSeaRbV3/gKxl2w82vluQ/SsPn7BQe4FKPDWRf/oZsOTZkdNqzEJ9YcNZYp2fGZjRnZAqzXSRDhdQQN0HrUia4+4vbxYtf6yBpHb5sRzzFRsfmRjMK1Ey0DEAsO/xTE/rBSSerfc3IpYNTxNqmEy7fyU5QUw1uU9NtNIwxTQyfMeMJ2M92Oo/O23ZY6y/6H2O9ib9nU+/kFOu+uku68Vn3YWzLesXvR8XWyv/CZOhVkL0HC0SGJeThisyiUhlzF6PwwkJpEV0bS/aMXCD1DCb3XSuf41xOf54AxGy/xU/mamBaEn/cUjvNzipi3JeMERaS7+ppJyovH+yY3RwFEUw6gTjyGpT33bfm/qyLHjC2MHdxrJ/VFiINhkVV1p+K3Fn3tiZezX5x2b+Umd3cGGJoPPNWSqELykw4B/2PIYvmfKP33N0BGZuJTVzpZ2XaPGSFQQE9wHy2RNM/myCirHThPnKwOx8TG+vX2DTviAH2E64jxrMxKrhbNaa+JVt6kDR6jDNDNTSzCPn637BvhDltsZrpRzYkgNBokgwxRREZ6EDs6J9zWgZ0JeJvtSv7b4GlgzaitKS+n10CVVnkulcnKyMFVE4jMweWtLyadphDOIX6GmHtS86GBtQx+qLxLXUAzHjDLaECikY4tgNaE=
+  bucket: clovervmci
+  local-dir: output-virtualbox-ovf
+  upload-dir: ci-builds
+  acl: public_read
+  on:
+    all_branches: true
+  skip_cleanup: true
