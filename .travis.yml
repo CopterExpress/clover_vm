@@ -16,7 +16,6 @@ deploy:
   secret_access_key: $S3_SECRET_KEY
   bucket: clovervm
   local-dir: output-virtualbox-ovf
-  upload-dir: ci-builds
   acl: public_read
   on:
     all_branches: true
