@@ -7,7 +7,7 @@
 PACKER="./packer"
 if [ ! -f ${PACKER} ]; then
     echo "Packer not found; downloading v1.5.4 from Hashicorp"
-    wget https://releases.hashicorp.com/packer/1.5.4/packer_1.5.4_linux_amd64.zip
+    wget --progress=dot:giga https://releases.hashicorp.com/packer/1.5.4/packer_1.5.4_linux_amd64.zip
     unzip packer_1.5.4_linux_amd64.zip
     rm packer_1.5.4_linux_amd64.zip
 fi
