@@ -12,6 +12,9 @@ echo "--- Increasing apt retries"
 sudo -E sh -c 'echo "APT::Acquire::Retries \"3\";" > /etc/apt/apt.conf.d/80-retries'
 cat /etc/apt/apt.conf.d/80-retries
 
+echo "--- Allowing apt to perform its updates"
+sudo -E sh -c 'apt update; while fuser /var/lib/dpkg/lock ; do sleep 0.5 ; done'
+
 echo "--- Installing open-vm-tools"
 
 sudo -E sh -c 'apt update; apt install -y open-vm-tools open-vm-tools-desktop'
