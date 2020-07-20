@@ -16,11 +16,10 @@ fi
 
 echo "--- Using Packer version $(${PACKER} --version)"
 
-# FIXME: This will fail, but might help virtualbox in travis?
-#if [ ! -f output-virtualbox-iso/clever-devel.ova ]; then
+if [ ! -f output-virtualbox-iso/clever-devel.ova ]; then
     echo "--- Building base image"
     ${PACKER} build -only=virtualbox-iso base_vm.json || true
-#fi
+fi
 
 echo "--- Building extended image"
 
