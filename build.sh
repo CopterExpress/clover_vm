@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # FIXME: Use system Packer if possible
 #PACKER=$(which packer)
 
@@ -14,9 +16,10 @@ fi
 
 echo "--- Using Packer version $(${PACKER} --version)"
 
-echo "--- Building base image"
-
-${PACKER} build -only=virtualbox-iso base_vm.json
+if [ ! -f output-virtualbox-iso/clever-devel.ova ]; then
+    echo "--- Building base image"
+    ${PACKER} build -only=virtualbox-iso base_vm.json
+fi
 
 echo "--- Building extended image"
 
