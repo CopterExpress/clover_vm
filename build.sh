@@ -25,4 +25,9 @@ echo "--- Building extended image"
 
 ${PACKER} build ros_ide_vm.json
 
+echo "--- Marking the VM"
+
+GIT_REV=$(git rev-parse --short HEAD)
+mv ./output-virtualbox-ovf/clever-devel.ova ./output-virtualbox-ovf/clover-devel_v0.20+${GIT_REV}.ova 
+
 echo "--- All done!"
