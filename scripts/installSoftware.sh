@@ -72,6 +72,7 @@ rosdep install --from-paths ${HOME}/catkin_ws/src --ignore-src --rosdistro melod
 curl https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh -o ${HOME}/install_geographiclib_datasets.sh
 chmod a+x ${HOME}/install_geographiclib_datasets.sh
 sudo -E sh -c '${HOME}/install_geographiclib_datasets.sh'
+sudo /usr/bin/python2.7 -m pip install -r ${HOME}/catkin_ws/src/clover/clover/requirements.txt
 source /opt/ros/melodic/setup.bash
 cd ${HOME}/catkin_ws && catkin_make
 echo "source /home/clever/catkin_ws/devel/setup.bash" >> ~/.bashrc
