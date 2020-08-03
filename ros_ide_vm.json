@@ -1,8 +1,8 @@
 {
   "variables": {
-    "user": "clever",
-    "password": "clever",
-    "vm-name": "clever-devel",
+    "user": "clover",
+    "password": "clover",
+    "vm-name": "clover-devel",
     "scriptsDir": "scripts",
     "assetsDir": "assets"
   },
@@ -41,17 +41,17 @@
   "provisioners": [{
     "type": "file",
     "source": "{{user `assetsDir`}}/background/",
-    "destination": "/home/clever/Pictures"
+    "destination": "/home/{{user `user`}}/Pictures"
   },
   {
     "type": "file",
     "source": "{{user `assetsDir`}}/pictures/",
-    "destination": "/home/clever/Pictures"
+    "destination": "/home/{{user `user`}}/Pictures"
   },
   {
     "type": "file",
     "source": "{{user `assetsDir`}}/desktop/",
-    "destination": "/home/clever/Desktop"
+    "destination": "/home/{{user `user`}}/Desktop"
   },
   {
     "type": "file",
@@ -71,6 +71,6 @@
   {
     "type": "file",
     "source": "{{user `assetsDir`}}/vscode/",
-    "destination": "/home/clever/.config/Code/User/"
+    "destination": "/home/{{user `user`}}/.config/Code/User/"
   }]
 }

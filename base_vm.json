@@ -1,8 +1,8 @@
 {
   "variables" : {
-    "user": "clever",
-    "password": "clever",
-    "vm-name": "clever-devel"
+    "user": "clover",
+    "password": "clover",
+    "vm-name": "clover-devel"
   },
   "builders": [{
     "type": "virtualbox-iso",

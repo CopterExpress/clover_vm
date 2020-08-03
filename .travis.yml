@@ -6,7 +6,7 @@ before_install:
   bionic contrib >> /etc/apt/sources.list" && sudo apt-get update && sudo apt-get
   install build-essential gcc make linux-headers-$(uname -r) virtualbox-6.0 && sudo
   usermod -aG vboxusers $(whoami)
-- mkdir output-virtualbox-iso && pushd output-virtualbox-iso && wget --progress=dot:giga https://github.com/sfalexrog/clever_vm/releases/download/v0_base_vm/clever-devel.ova
+- mkdir output-virtualbox-iso && pushd output-virtualbox-iso && wget --progress=dot:giga https://github.com/sfalexrog/clever_vm/releases/download/v0.1_base_vm/clover-devel.ova
   && popd
 script:
 - "./build.sh"
