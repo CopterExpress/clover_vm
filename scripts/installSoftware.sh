@@ -6,7 +6,7 @@ echo "--- Current environment:"
 /usr/bin/env
 
 echo "Enabling passwordless sudo"
-echo "${PASSWORD}" | sudo -E -S sh -c 'echo "clever ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'
+echo "${PASSWORD}" | sudo -E -S sh -c "echo '${USER} ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers"
 
 echo "--- Increasing apt retries"
 sudo -E sh -c 'echo "APT::Acquire::Retries \"3\";" > /etc/apt/apt.conf.d/80-retries'
@@ -39,7 +39,7 @@ make -C ${HOME}/Firmware px4_sitl
 echo "--- Patching gazebo plugins for SITL"
 cd ${HOME}/Firmware/Tools/sitl_gazebo
 patch -p1 < /tmp/patches/sitl_gazebo.patch
-echo 'export SVGA_VGPU10=0' >> /home/clever/Firmware/Tools/setup_gazebo.bash
+echo 'export SVGA_VGPU10=0' >> ${HOME}/Firmware/Tools/setup_gazebo.bash
 
 echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 
@@ -75,7 +75,7 @@ sudo -E sh -c '${HOME}/install_geographiclib_datasets.sh'
 sudo /usr/bin/python2.7 -m pip install -r ${HOME}/catkin_ws/src/clover/clover/requirements.txt
 source /opt/ros/melodic/setup.bash
 cd ${HOME}/catkin_ws && catkin_make
-echo "source /home/clever/catkin_ws/devel/setup.bash" >> ~/.bashrc
+echo "source ${HOME}/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
 echo "--- Enabling roscore service"
 sed -i "s/pi/${USER}/g" ${HOME}/catkin_ws/src/clover/builder/assets/roscore.service
@@ -102,10 +102,10 @@ sudo -E sh -c 'apt update; apt install -y sshfs gvfs-fuse gvfs-backends python3-
 
 echo "--- Personalizing VM"
 sudo -E sh -c 'mv /etc/xdg/autostart/light-locker.desktop /etc/xdg/autostart/light-locker.desktop.old'
-sudo -E sh -c 'cp /usr/share/xfce4/backdrops/xubuntu-wallpaper.png /usr/share/xfce4/backdrops/xubuntu-wallpaper-old.png; cp /home/clever/Pictures/Logo_COEX_2019_white_on_black.png /usr/share/xfce4/backdrops/xubuntu-wallpaper.png'
-sudo -E sh -c 'hostnamectl set-hostname clever-dev; sed -i "s/ubuntu/clever-dev clever-dev.local/g" /etc/hosts'
+sudo -E sh -c 'cp /usr/share/xfce4/backdrops/xubuntu-wallpaper.png /usr/share/xfce4/backdrops/xubuntu-wallpaper-old.png; cp ${HOME}/Pictures/Logo_COEX_2019_white_on_black.png /usr/share/xfce4/backdrops/xubuntu-wallpaper.png'
+sudo -E sh -c 'hostnamectl set-hostname clover-dev; sed -i "s/ubuntu/clover-dev clover-dev.local/g" /etc/hosts'
 echo "export ROS_HOSTNAME=\`hostname\`.local" >> ${HOME}/.bashrc
-chmod a+x /home/clever/Desktop/*
+chmod a+x ${HOME}/Desktop/*
 
 echo "--- Cleaning up"
 sudo -E sh -c 'apt-get -y autoremove; apt-get -y autoclean; apt-get -y clean; fstrim -v /'
