@@ -13,7 +13,7 @@
     "format": "ova",
     "guest_additions_mode": "disable",
 
-    "headless": "true",
+    "headless": "false",
 
     "vboxmanage": [
       ["modifyvm", "{{.Name}}", "--memory", "6144", "--vram", "128", "--mouse", "usbtablet", "--rtcuseutc", "on", "--nictype1", "virtio"],
