@@ -29,7 +29,7 @@ sudo -E sh -c 'rosdep init'
 rosdep update
 
 echo "--- Downloading PX4 and installing its dependencies"
-git clone -b v1.10.1-clever https://github.com/CopterExpress/Firmware ${HOME}/Firmware
+git clone -b v1.10.1-clover https://github.com/CopterExpress/Firmware ${HOME}/Firmware
 sudo -E -S sh -c '${HOME}/Firmware/Tools/setup/ubuntu.sh'
 sudo -E -S sh -c 'echo "2" | update-alternatives --config java'
 sudo -E -S sed -i -e '/^assistive_technologies=/s/^/#/' /etc/java-*-openjdk/accessibility.properties
