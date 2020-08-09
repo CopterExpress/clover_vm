@@ -77,6 +77,19 @@ source /opt/ros/melodic/setup.bash
 cd ${HOME}/catkin_ws && catkin_make
 echo "source ${HOME}/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
+echo "--- Installing npm and building docs"
+cd ${HOME}
+wget --progress=dot:giga https://nodejs.org/dist/v10.15.0/node-v10.15.0-linux-x64.tar.gz
+tar -xzf node-v10.15.0-linux-x64.tar.gz
+sudo cp -R node-v10.15.0-linux-x64/* /usr/local/
+rm -rf node-v10.15.0-linux-x64
+rm node-v10.15.0-linux-x64.tar.gz
+cd ${HOME}/catkin_ws/src/clover
+NPM_CONFIG_UNSAFE_PERM=true npm install gitbook-cli -g
+NPM_CONFIG_UNSAFE_PERM=true gitbook install
+gitbook build
+touch node_modules/CATKIN_IGNORE docs/CATKIN_IGNORE _book/CATKIN_IGNORE clover/www/CATKIN_IGNORE # ignore documentation files by catkin
+
 echo "--- Enabling roscore service"
 sed -i "s/pi/${USER}/g" ${HOME}/catkin_ws/src/clover/builder/assets/roscore.service
 sudo cp ${HOME}/catkin_ws/src/clover/builder/assets/roscore.service /etc/systemd/system
