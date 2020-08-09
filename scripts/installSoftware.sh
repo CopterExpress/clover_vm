@@ -77,13 +77,19 @@ source /opt/ros/melodic/setup.bash
 cd ${HOME}/catkin_ws && catkin_make
 echo "source ${HOME}/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
-echo "--- Installing npm and building docs"
+echo "--- Installing npm"
 cd ${HOME}
 wget --progress=dot:giga https://nodejs.org/dist/v10.15.0/node-v10.15.0-linux-x64.tar.gz
 tar -xzf node-v10.15.0-linux-x64.tar.gz
 sudo cp -R node-v10.15.0-linux-x64/* /usr/local/
 rm -rf node-v10.15.0-linux-x64
 rm node-v10.15.0-linux-x64.tar.gz
+echo "--- Reconfiguring npm to use local prefix"
+mkdir ${HOME}/.npm-global
+npm config set prefix "${HOME}/.npm-global"
+export PATH=${HOME}/.npm-global/bin:$PATH
+echo 'export PATH='${HOME}'/.npm-global/bin:$PATH' >> ${HOME}/.bashrc
+echo "--- Installing gitbook and building docs"
 cd ${HOME}/catkin_ws/src/clover
 NPM_CONFIG_UNSAFE_PERM=true npm install gitbook-cli -g
 NPM_CONFIG_UNSAFE_PERM=true gitbook install
