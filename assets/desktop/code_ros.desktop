@@ -2,7 +2,7 @@
 Name=VS Code + ROS
 Comment=Code Editing. Redefined.
 GenericName=Text Editor
-Exec=/bin/bash -c "source /home/clever/catkin_ws/devel/setup.bash; /usr/share/code/code --no-sandbox --unity-launch %F"
+Exec=/bin/bash -c "source /home/clover/catkin_ws/devel/setup.bash; /usr/share/code/code --no-sandbox --unity-launch %F"
 Icon=/usr/share/pixmaps/com.visualstudio.code.png
 Type=Application
 StartupNotify=false
