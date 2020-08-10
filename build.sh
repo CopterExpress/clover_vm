@@ -28,6 +28,11 @@ ${PACKER} build ros_ide_vm.json
 echo "--- Marking the VM"
 
 GIT_REV=$(git rev-parse --short HEAD)
-mv ./output-virtualbox-ovf/clover-devel.ova ./output-virtualbox-ovf/clover-devel_v0.20+${GIT_REV}.ova 
+VM_NAME="clover-devel_v0.20+${GIT_REV}.ova"
+mv ./output-virtualbox-ovf/clover-devel.ova ./output-virtualbox-ovf/${VM_NAME}
 
 echo "--- All done!"
+
+if [ "${CI}" == "true"]; then
+    echo "Deploying to https://clovervm.ams3.digitaloceanspaces.com/${VM_NAME}"
+fi
