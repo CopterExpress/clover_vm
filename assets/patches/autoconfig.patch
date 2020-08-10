@@ -1,0 +1,49 @@
+diff --git a/clover/launch/aruco.launch b/clover/launch/aruco.launch
+index c4ce578..5f3be12 100644
+--- a/clover/launch/aruco.launch
++++ b/clover/launch/aruco.launch
+@@ -1,7 +1,7 @@
+ <launch>
+     <arg name="aruco_detect" default="true"/>
+-    <arg name="aruco_map" default="false"/>
+-    <arg name="aruco_vpe" default="false"/>
++    <arg name="aruco_map" default="true"/>
++    <arg name="aruco_vpe" default="true"/>
+ 
+     <!-- For additional help go to https://clover.coex.tech/aruco -->
+ 
+@@ -24,7 +24,7 @@
+         <remap from="image_raw" to="main_camera/image_raw"/>
+         <remap from="camera_info" to="main_camera/camera_info"/>
+         <remap from="markers" to="aruco_detect/markers"/>
+-        <param name="map" value="$(find aruco_pose)/map/map.txt"/>
++        <param name="map" value="$(find aruco_pose)/map/cmit.txt"/>
+         <param name="known_tilt" value="map"/>
+         <param name="image_axis" value="true"/>
+         <param name="frame_id" value="aruco_map_detected" if="$(arg aruco_vpe)"/>
+diff --git a/clover/launch/clover.launch b/clover/launch/clover.launch
+index e1bd714..6bf140c 100644
+--- a/clover/launch/clover.launch
++++ b/clover/launch/clover.launch
+@@ -7,7 +7,7 @@
+     <arg name="rosbridge" default="true"/>
+     <arg name="main_camera" default="true"/>
+     <arg name="optical_flow" default="true"/>
+-    <arg name="aruco" default="false"/>
++    <arg name="aruco" default="true"/>
+     <arg name="rangefinder_vl53l1x" default="true"/>
+     <arg name="led" default="true"/>
+     <arg name="rc" default="true"/>
+diff --git a/clover_simulation/launch/simulator.launch b/clover_simulation/launch/simulator.launch
+index d70f5f6..e610c53 100644
+--- a/clover_simulation/launch/simulator.launch
++++ b/clover_simulation/launch/simulator.launch
+@@ -13,7 +13,7 @@
+         <!-- Workaround for crashes in VMware -->
+         <env name="SVGA_VGPU10" value="0"/>
+         <arg name="gui" value="true"/>
+-        <arg name="world_name" value="$(find clover_simulation)/resources/worlds/clover.world"/>
++        <arg name="world_name" value="$(find clover_simulation)/resources/worlds/clover_aruco.world"/>
+         <arg name="verbose" value="true"/>
+     </include>
+ 
