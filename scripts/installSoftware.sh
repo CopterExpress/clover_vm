@@ -77,6 +77,13 @@ source /opt/ros/melodic/setup.bash
 cd ${HOME}/catkin_ws && catkin_make
 echo "source ${HOME}/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
+echo "--- Generating ArUco field"
+source ${HOME}/catkin_ws/devel/setup.bash
+CLOVER_BASE_PATH=${HOME}/catkin_ws/src/clover
+ARUCO_MAP_PATH=${CLOVER_BASE_PATH}/aruco_pose/map
+WORLD_PATH=${CLOVER_BASE_PATH}/clover_simulation/resources/worlds
+rosrun clover_simulation aruco_gen --offset-z=0.01 --single-model --source-world=${WORLD_PATH}/clover.world ${ARUCO_MAP_PATH}/cmit.txt > ${WORLD_PATH}/clover_aruco.world
+
 echo "--- Installing npm"
 cd ${HOME}
 wget --progress=dot:giga https://nodejs.org/dist/v10.15.0/node-v10.15.0-linux-x64.tar.gz
