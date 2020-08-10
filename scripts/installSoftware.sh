@@ -61,7 +61,7 @@ echo "--- Installing pylint"
 /usr/bin/python2.7 -m pip install -U "pylint<2.0.0" --user
 /usr/bin/python3.6 -m pip install -U pylint --user
 
-echo "--- Cloning and installing Clever packages"
+echo "--- Cloning and installing Clover packages"
 mkdir -p ${HOME}/catkin_ws/src
 git clone -b clover_description https://github.com/CopterExpress/clover ${HOME}/catkin_ws/src/clover
 git clone https://github.com/CopterExpress/ros_led ${HOME}/catkin_ws/src/ros_led
