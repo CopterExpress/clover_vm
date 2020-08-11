@@ -33,6 +33,6 @@ mv ./output-virtualbox-ovf/clover-devel.ova ./output-virtualbox-ovf/${VM_NAME}
 
 echo "--- All done!"
 
-if [ "${CI}" == "true"]; then
+if [ "${CI}" == "true" ]; then
     echo "Deploying to https://clovervm.ams3.digitaloceanspaces.com/${VM_NAME}"
 fi
