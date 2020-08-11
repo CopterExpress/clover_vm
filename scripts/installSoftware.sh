@@ -82,7 +82,7 @@ source ${HOME}/catkin_ws/devel/setup.bash
 CLOVER_BASE_PATH=${HOME}/catkin_ws/src/clover
 ARUCO_MAP_PATH=${CLOVER_BASE_PATH}/aruco_pose/map
 WORLD_PATH=${CLOVER_BASE_PATH}/clover_simulation/resources/worlds
-rosrun clover_simulation aruco_gen --offset-z=0.01 --single-model --source-world=${WORLD_PATH}/clover.world ${ARUCO_MAP_PATH}/cmit.txt > ${WORLD_PATH}/clover_aruco.world
+rosrun clover_simulation aruco_gen --single-model --source-world=${WORLD_PATH}/clover.world ${ARUCO_MAP_PATH}/cmit.txt > ${WORLD_PATH}/clover_aruco.world
 
 echo "--- Applying configuration patches"
 cd ${HOME}/catkin_ws/src/clover
