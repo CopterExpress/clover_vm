@@ -88,6 +88,10 @@ echo "--- Applying configuration patches"
 cd ${HOME}/catkin_ws/src/clover
 patch -p1 < /tmp/patches/autoconfig.patch
 
+echo "--- Removing problematic models"
+cd ${HOME}/catkin_ws/src/sitl_gazebo/models
+rm -rf Box BoxesLargeOnPallet BoxesLargeOnPallet_2 BoxesLargeOnPallet_3
+
 echo "--- Installing npm"
 cd ${HOME}
 wget --progress=dot:giga https://nodejs.org/dist/v10.15.0/node-v10.15.0-linux-x64.tar.gz
