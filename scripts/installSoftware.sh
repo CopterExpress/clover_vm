@@ -63,7 +63,7 @@ echo "--- Installing pylint"
 
 echo "--- Cloning and installing Clover packages"
 mkdir -p ${HOME}/catkin_ws/src
-git clone -b clover_description https://github.com/CopterExpress/clover ${HOME}/catkin_ws/src/clover
+git clone https://github.com/CopterExpress/clover ${HOME}/catkin_ws/src/clover
 git clone https://github.com/CopterExpress/ros_led ${HOME}/catkin_ws/src/ros_led
 # Make PX4 and Gazebo plugins visible in the workspace
 ln -s ${HOME}/Firmware ${HOME}/catkin_ws/src/Firmware
