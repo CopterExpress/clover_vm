@@ -60,8 +60,7 @@ code --install-extension ms-vscode.cpptools
 code --install-extension streetsidesoftware.code-spell-checker
 code --install-extension eamodio.gitlens
 echo "--- Installing pylint"
-#/usr/bin/python2.7 -m pip install -U "pylint<2.0.0" --user
-/usr/bin/python3.6 -m pip install -U pylint --user
+/usr/bin/python3 -m pip install -U pylint --user
 
 echo "--- Cloning and installing Clover packages"
 sudo sh -c 'curl http://deb.coex.tech/aptly_repo_signing.key 2> /dev/null | apt-key add -'
@@ -97,7 +96,7 @@ git clone https://github.com/ethz-asl/mav_comm
 # Make PX4 and Gazebo plugins visible in the workspace
 ln -s ${HOME}/Firmware ${HOME}/catkin_ws/src/Firmware
 ln -s ${HOME}/Firmware/Tools/sitl_gazebo ${HOME}/catkin_ws/src/sitl_gazebo
-rosdep install --from-paths ${HOME}/catkin_ws/src --ignore-src --rosdistro melodic -y
+rosdep install --from-paths ${HOME}/catkin_ws/src --ignore-src --rosdistro noetic -y
 sudo /opt/ros/noetic/lib/mavros/install_geographiclib_datasets.sh
 sudo /usr/bin/python3 -m pip install -r ${HOME}/catkin_ws/src/clover/clover/requirements.txt
 source /opt/ros/noetic/setup.bash
@@ -147,7 +146,7 @@ sudo cp ${HOME}/catkin_ws/src/clover/builder/assets/monkey.service /etc/systemd/
 sudo systemctl enable monkey
 
 echo "--- Installing additional packages"
-sudo -E sh -c 'apt update; apt install -y sshfs gvfs-fuse gvfs-backends python3-opencv byobu ipython ipython3 byobu nmap lsof tmux vim ros-melodic-rqt-multiplot'
+sudo -E sh -c 'apt update; apt install -y sshfs gvfs-fuse gvfs-backends python3-opencv byobu ipython3 byobu nmap lsof tmux vim ros-noetic-rqt-multiplot'
 
 echo "--- Personalizing VM"
 sudo -E sh -c 'mv /etc/xdg/autostart/light-locker.desktop /etc/xdg/autostart/light-locker.desktop.old'
