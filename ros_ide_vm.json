@@ -72,10 +72,5 @@
     "type": "shell",
     "script": "scripts/installSoftware.sh",
     "execute_command": "PASSWORD='{{user `password`}}' bash '{{.Path}}'"
-  },
-  {
-    "type": "file",
-    "source": "{{user `assetsDir`}}/vscode/",
-    "destination": "/home/{{user `user`}}/.config/Code/User/"
   }]
 }
