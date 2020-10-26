@@ -28,7 +28,7 @@ ${PACKER} build ros_ide_vm.json
 echo "--- Marking the VM"
 
 GIT_REV=$(git rev-parse --short HEAD)
-VM_NAME="clover-devel_v0.20+${GIT_REV}.ova"
+VM_NAME="clover-devel_v0.22+${GIT_REV}.ova"
 mv ./output-virtualbox-ovf/clover-devel.ova ./output-virtualbox-ovf/${VM_NAME}
 
 echo "--- All done!"
