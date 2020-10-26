@@ -92,7 +92,7 @@ mkdir -p ${HOME}/catkin_ws/src
 git clone https://github.com/CopterExpress/clover ${HOME}/catkin_ws/src/clover
 git clone https://github.com/CopterExpress/ros_led ${HOME}/catkin_ws/src/ros_led
 # These packages are missing from Noetic release, but are required for sitl_gazebo
-git clone https://github.com/ethz-asl/mav_comm
+git clone https://github.com/ethz-asl/mav_comm ${HOME}/catkin_ws/src/mav_comm
 # Make PX4 and Gazebo plugins visible in the workspace
 ln -s ${HOME}/Firmware ${HOME}/catkin_ws/src/Firmware
 ln -s ${HOME}/Firmware/Tools/sitl_gazebo ${HOME}/catkin_ws/src/sitl_gazebo
