@@ -64,11 +64,6 @@
     "destination": "/tmp"
   },
   {
-    "type": "file",
-    "source": "{{user `assetsDir`}}/configs/xfce4-power-manager.xml",
-    "destination": "/home/{{user `user`}}/.config/xfce4/xfconf/xfce-perchannel/xml/xfce4-power-manager.xml"
-  },
-  {
     "type": "shell",
     "script": "scripts/installSoftware.sh",
     "execute_command": "PASSWORD='{{user `password`}}' bash '{{.Path}}'"
