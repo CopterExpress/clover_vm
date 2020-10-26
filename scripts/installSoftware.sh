@@ -146,7 +146,7 @@ sudo cp ${HOME}/catkin_ws/src/clover/builder/assets/monkey.service /etc/systemd/
 sudo systemctl enable monkey
 
 echo "--- Installing additional packages"
-sudo -E sh -c 'apt update; apt install -y sshfs gvfs-fuse gvfs-backends python3-opencv byobu ipython3 byobu nmap lsof tmux vim ros-noetic-rqt-multiplot'
+sudo -E sh -c 'apt update; apt install -y sshfs gvfs-fuse gvfs-backends python3-opencv byobu ipython3 byobu nmap lsof tmux vim'
 
 echo "--- Personalizing VM"
 sudo -E sh -c 'mv /etc/xdg/autostart/light-locker.desktop /etc/xdg/autostart/light-locker.desktop.old'
