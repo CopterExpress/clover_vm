@@ -89,7 +89,7 @@ EOF'
 sudo apt update
 rosdep update
 mkdir -p ${HOME}/catkin_ws/src
-git clone -b 22 https://github.com/CopterExpress/clover ${HOME}/catkin_ws/src/clover
+git clone -b 22-armhf https://github.com/CopterExpress/clover ${HOME}/catkin_ws/src/clover
 git clone https://github.com/CopterExpress/ros_led ${HOME}/catkin_ws/src/ros_led
 # These packages are missing from Noetic release, but are required for sitl_gazebo
 git clone https://github.com/ethz-asl/mav_comm ${HOME}/catkin_ws/src/mav_comm
