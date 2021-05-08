@@ -1,3 +1,16 @@
+diff --git a/include/gazebo_opticalflow_plugin.h b/include/gazebo_opticalflow_plugin.h
+index 4fbeab2..18a192b 100644
+--- a/include/gazebo_opticalflow_plugin.h
++++ b/include/gazebo_opticalflow_plugin.h
+@@ -40,7 +40,7 @@
+ #include "flow_px4.hpp"
+ 
+ #define DEFAULT_RATE 20
+-#define HAS_GYRO TRUE
++#define HAS_GYRO true
+ 
+ using namespace cv;
+ using namespace std;
 diff --git a/package.xml b/package.xml
 index ae0fb34..12f17b8 100644
 --- a/package.xml
@@ -13,21 +26,8 @@ index ae0fb34..12f17b8 100644
    <run_depend>eigen</run_depend>
    <run_depend>gazebo_ros</run_depend>
    <run_depend>geometry_msgs</run_depend>
-diff --git a/include/gazebo_opticalflow_plugin.h b/include/gazebo_opticalflow_plugin.h
-index 4fbeab2..18a192b 100644
---- a/include/gazebo_opticalflow_plugin.h
-+++ b/include/gazebo_opticalflow_plugin.h
-@@ -40,7 +40,7 @@
- #include "flow_px4.hpp"
- 
- #define DEFAULT_RATE 20
--#define HAS_GYRO TRUE
-+#define HAS_GYRO true
- 
- using namespace cv;
- using namespace std;
 diff --git a/src/gazebo_geotagged_images_plugin.cpp b/src/gazebo_geotagged_images_plugin.cpp
-index 050558f..7029199 100644
+index 050558f..3edda33 100644
 --- a/src/gazebo_geotagged_images_plugin.cpp
 +++ b/src/gazebo_geotagged_images_plugin.cpp
 @@ -581,7 +581,8 @@ void GeotaggedImagesPlugin::_send_capture_status(struct sockaddr* srcaddr)
