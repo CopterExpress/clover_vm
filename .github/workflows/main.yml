@@ -11,12 +11,9 @@ jobs:
     runs-on: macos-10.15 # Using macOS as https://github.com/actions/virtual-environments/issues/183
     steps:
       - uses: actions/checkout@v2
-      - name: Setup
+      - name: Download base image
         run: |
-          set -x
           mkdir output-virtualbox-iso
-          pushd output-virtualbox-iso
-          wget --progress=dot:giga https://clovervm.ams3.digitaloceanspaces.com/base-focal.ova -O clover-devel.ova
-          popd
+          wget --progress=dot:giga https://clovervm.ams3.digitaloceanspaces.com/base-focal.ova -O output-virtualbox-iso/clover-devel.ova
       - name: Build
         run: ./build.sh
