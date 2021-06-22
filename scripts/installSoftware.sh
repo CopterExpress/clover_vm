@@ -13,17 +13,17 @@ sudo -E sh -c 'echo "APT::Acquire::Retries \"3\";" > /etc/apt/apt.conf.d/80-retr
 cat /etc/apt/apt.conf.d/80-retries
 
 echo "--- Allowing apt to perform its updates"
-sudo -E sh -c 'apt update; while fuser /var/lib/dpkg/lock ; do sleep 0.5 ; done'
+sudo -E sh -c 'apt-get update; while fuser /var/lib/dpkg/lock ; do sleep 0.5 ; done'
 
 echo "--- Installing open-vm-tools"
 
-sudo -E sh -c 'apt update; apt install -y open-vm-tools open-vm-tools-desktop'
+sudo -E sh -c 'apt-get update; apt-get install -y open-vm-tools open-vm-tools-desktop'
 
 echo "--- Installing ROS desktop packages"
 
 sudo -E sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 sudo -E sh -c 'apt-key adv --keyserver "hkp://keyserver.ubuntu.com:80" --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654'
-sudo -E sh -c 'apt update; apt install -y python3-rosdep python3-rosinstall-generator python3-wstool build-essential ros-noetic-desktop'
+sudo -E sh -c 'apt-get update; apt-get install -y python3-rosdep python3-rosinstall-generator python3-wstool build-essential ros-noetic-desktop'
 
 sudo -E sh -c 'rosdep init'
 rosdep update
@@ -47,12 +47,12 @@ echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 
 echo "--- Installing Visual Studio Code"
 
-sudo -E sh -c 'apt update; apt install -y curl'
+sudo -E sh -c 'apt-get update; apt-get install -y curl'
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > ${HOME}/packages.microsoft.gpg
 sudo -E sh -c 'install -o root -g root -m 644 ${HOME}/packages.microsoft.gpg /usr/share/keyrings'
 rm ${HOME}/packages.microsoft.gpg
 sudo -E sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-sudo -E sh -c 'apt install -y apt-transport-https; apt update; apt install -y code'
+sudo -E sh -c 'apt-get install -y apt-transport-https; apt-get update; apt-get install -y code'
 code --install-extension ms-python.python
 code --install-extension DavidAnson.vscode-markdownlint
 code --install-extension ms-vscode.cmake-tools
@@ -86,7 +86,7 @@ ws281x:
   ubuntu:
     focal: [ros-noetic-ws281x]
 EOF'
-sudo apt update
+sudo apt-get update
 rosdep update
 mkdir -p ${HOME}/catkin_ws/src
 git clone -b 22 https://github.com/CopterExpress/clover ${HOME}/catkin_ws/src/clover
@@ -132,21 +132,21 @@ sudo systemctl enable roscore.service
 
 echo "--- Installing QGroundControl"
 sudo -E sh -c "usermod -a -G dialout $USER"
-sudo -E sh -c 'apt remove -y modemmanager; apt install -y gstreamer1.0-plugins-bad gstreamer1.0-libav'
+sudo -E sh -c 'apt-get remove -y modemmanager; apt-get install -y gstreamer1.0-plugins-bad gstreamer1.0-libav'
 curl https://s3-us-west-2.amazonaws.com/qgroundcontrol/latest/QGroundControl.AppImage -o ${HOME}/QGroundControl.AppImage
 chmod a+x ${HOME}/QGroundControl.AppImage
 
 echo "--- Installing Firefox web browser"
-sudo -E sh -c 'apt update; apt install -y firefox'
+sudo -E sh -c 'apt-get update; apt-get install -y firefox'
 
 echo "--- Installing Monkey web server"
-sudo apt install -y /tmp/packages/monkey_1.6.9-1_amd64.deb
+sudo apt-get install -y /tmp/packages/monkey_1.6.9-1_amd64.deb
 sed "s/pi/${USER}/g" ${HOME}/catkin_ws/src/clover/builder/assets/monkey | sudo tee /etc/monkey/sites/default
 sudo cp ${HOME}/catkin_ws/src/clover/builder/assets/monkey.service /etc/systemd/system/monkey.service
 sudo systemctl enable monkey
 
 echo "--- Installing additional packages"
-sudo -E sh -c 'apt update; apt install -y sshfs gvfs-fuse gvfs-backends python3-opencv byobu ipython3 byobu nmap lsof tmux vim ros-noetic-rqt-multiplot'
+sudo -E sh -c 'apt-get update; apt-get install -y sshfs gvfs-fuse gvfs-backends python3-opencv byobu ipython3 byobu nmap lsof tmux vim ros-noetic-rqt-multiplot'
 
 echo "--- Personalizing VM"
 sudo -E sh -c 'cp /usr/share/xfce4/backdrops/xubuntu-wallpaper.png /usr/share/xfce4/backdrops/xubuntu-wallpaper-old.png; cp ${HOME}/Pictures/Logo_COEX_2019_white_on_black.png /usr/share/xfce4/backdrops/xubuntu-wallpaper.png'
