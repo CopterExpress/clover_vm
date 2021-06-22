@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-10.15
+    runs-on: macos-10.15 # Using macOS as https://github.com/actions/virtual-environments/issues/183
     steps:
       - uses: actions/checkout@v2
       - name: Setup
