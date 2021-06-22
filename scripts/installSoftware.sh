@@ -31,7 +31,7 @@ rosdep update
 # FIXME: PX4 needs pip to be installed
 # FIXME: python2 dependencies?
 echo "--- Downloading PX4 and installing its dependencies"
-git clone -b v1.11.1-clover https://github.com/CopterExpress/Firmware ${HOME}/Firmware
+git clone --recursive -b v1.11.1-clover https://github.com/CopterExpress/Firmware ${HOME}/Firmware
 # PX4 v1.11.1 script will happily run sudo by itself
 ${HOME}/Firmware/Tools/setup/ubuntu.sh
 # Ubuntu 20.04 no longer sets assistive_technologies, thankfully
