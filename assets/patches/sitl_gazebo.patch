@@ -1,3 +1,16 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 18c59d6..6f0e577 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -97,7 +97,7 @@ if (BUILD_ROS_INTERFACE)
+ endif()
+ 
+ # find MAVLink
+-find_package(MAVLink)
++find_package(MAVLink "2.0" EXACT REQUIRED)
+ 
+ # see if catkin was invoked to build this
+ if (CATKIN_DEVEL_PREFIX)
 diff --git a/package.xml b/package.xml
 index ae0fb34..12f17b8 100644
 --- a/package.xml
