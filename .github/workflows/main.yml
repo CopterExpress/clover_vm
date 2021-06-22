@@ -16,7 +16,7 @@ jobs:
           set -x
           mkdir output-virtualbox-iso
           pushd output-virtualbox-iso
-          wget --progress=dot:giga https://github.com/sfalexrog/clever_vm/releases/download/v0.1_base_vm/clover-devel.ova
+          wget --progress=dot:giga https://clovervm.ams3.digitaloceanspaces.com/base-focal.ova -O clover-devel.ova
           popd
       - name: Build
         run: ./build.sh
