@@ -23,16 +23,18 @@ echo "--- Installing ROS desktop packages"
 
 sudo -E sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 sudo -E sh -c 'apt-key adv --keyserver "hkp://keyserver.ubuntu.com:80" --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654'
-sudo -E sh -c 'apt update; apt install -y python-rosdep python-rosinstall-generator python-wstool build-essential ros-melodic-desktop'
+sudo -E sh -c 'apt update; apt install -y python3-rosdep python3-rosinstall-generator python3-wstool build-essential ros-noetic-desktop'
 
 sudo -E sh -c 'rosdep init'
 rosdep update
 
+# FIXME: PX4 needs pip to be installed
+# FIXME: python2 dependencies?
 echo "--- Downloading PX4 and installing its dependencies"
-git clone -b v1.10.1-clover https://github.com/CopterExpress/Firmware ${HOME}/Firmware
-sudo -E -S sh -c '${HOME}/Firmware/Tools/setup/ubuntu.sh'
-sudo -E -S sh -c 'echo "2" | update-alternatives --config java'
-sudo -E -S sed -i -e '/^assistive_technologies=/s/^/#/' /etc/java-*-openjdk/accessibility.properties
+git clone -b v1.11.1-clover https://github.com/CopterExpress/Firmware ${HOME}/Firmware
+# PX4 v1.11.1 script will happily run sudo by itself
+${HOME}/Firmware/Tools/setup/ubuntu.sh
+# Ubuntu 20.04 no longer sets assistive_technologies, thankfully
 
 echo "--- Prebuilding PX4 SITL configuration"
 make -C ${HOME}/Firmware px4_sitl
@@ -41,7 +43,7 @@ cd ${HOME}/Firmware/Tools/sitl_gazebo
 patch -p1 < /tmp/patches/sitl_gazebo.patch
 echo 'export SVGA_VGPU10=0' >> ${HOME}/Firmware/Tools/setup_gazebo.bash
 
-echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 
 echo "--- Installing Visual Studio Code"
 
@@ -58,22 +60,46 @@ code --install-extension ms-vscode.cpptools
 code --install-extension streetsidesoftware.code-spell-checker
 code --install-extension eamodio.gitlens
 echo "--- Installing pylint"
-/usr/bin/python2.7 -m pip install -U "pylint<2.0.0" --user
-/usr/bin/python3.6 -m pip install -U pylint --user
+/usr/bin/python3 -m pip install -U pylint --user
 
 echo "--- Cloning and installing Clover packages"
+sudo sh -c 'curl http://deb.coex.tech/aptly_repo_signing.key 2> /dev/null | apt-key add -'
+sudo sh -c 'echo "deb http://deb.coex.tech/ros xenial main" > /etc/apt/sources.list.d/coex.tech.list'
+sudo sh -c 'echo "yaml file:///etc/ros/rosdep/coex.yaml" > /etc/ros/rosdep/sources.list.d/99-coex.list'
+sudo sh -c 'cat <<EOF > /etc/ros/rosdep/coex.yaml
+led_msgs:
+  ubuntu:
+    focal: [ros-noetic-led-msgs]
+async_web_server_cpp:
+  ubuntu:
+    focal: [ros-noetic-async-web-server-cpp]
+ros_pytest:
+  ubuntu:
+    focal: [ros-noetic-ros-pytest]
+tf2_web_republisher:
+  ubuntu:
+    focal: [ros-noetic-tf2-web-republisher]
+web_video_server:
+  ubuntu:
+    focal: [ros-noetic-web-video-server]
+ws281x:
+  ubuntu:
+    focal: [ros-noetic-ws281x]
+EOF'
+sudo apt update
+rosdep update
 mkdir -p ${HOME}/catkin_ws/src
-git clone https://github.com/CopterExpress/clover ${HOME}/catkin_ws/src/clover
+git clone -b 22 https://github.com/CopterExpress/clover ${HOME}/catkin_ws/src/clover
 git clone https://github.com/CopterExpress/ros_led ${HOME}/catkin_ws/src/ros_led
+# These packages are missing from Noetic release, but are required for sitl_gazebo
+git clone https://github.com/ethz-asl/mav_comm ${HOME}/catkin_ws/src/mav_comm
 # Make PX4 and Gazebo plugins visible in the workspace
 ln -s ${HOME}/Firmware ${HOME}/catkin_ws/src/Firmware
 ln -s ${HOME}/Firmware/Tools/sitl_gazebo ${HOME}/catkin_ws/src/sitl_gazebo
-rosdep install --from-paths ${HOME}/catkin_ws/src --ignore-src --rosdistro melodic -y
-curl https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh -o ${HOME}/install_geographiclib_datasets.sh
-chmod a+x ${HOME}/install_geographiclib_datasets.sh
-sudo -E sh -c '${HOME}/install_geographiclib_datasets.sh'
-sudo /usr/bin/python2.7 -m pip install -r ${HOME}/catkin_ws/src/clover/clover/requirements.txt
-source /opt/ros/melodic/setup.bash
+rosdep install --from-paths ${HOME}/catkin_ws/src --ignore-src --rosdistro noetic -y
+sudo /opt/ros/noetic/lib/mavros/install_geographiclib_datasets.sh
+sudo /usr/bin/python3 -m pip install -r ${HOME}/catkin_ws/src/clover/clover/requirements.txt
+source /opt/ros/noetic/setup.bash
 cd ${HOME}/catkin_ws && catkin_make
 echo "source ${HOME}/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
@@ -120,10 +146,9 @@ sudo cp ${HOME}/catkin_ws/src/clover/builder/assets/monkey.service /etc/systemd/
 sudo systemctl enable monkey
 
 echo "--- Installing additional packages"
-sudo -E sh -c 'apt update; apt install -y sshfs gvfs-fuse gvfs-backends python3-opencv byobu ipython ipython3 byobu nmap lsof tmux vim ros-melodic-rqt-multiplot'
+sudo -E sh -c 'apt update; apt install -y sshfs gvfs-fuse gvfs-backends python3-opencv byobu ipython3 byobu nmap lsof tmux vim ros-noetic-rqt-multiplot'
 
 echo "--- Personalizing VM"
-sudo -E sh -c 'mv /etc/xdg/autostart/light-locker.desktop /etc/xdg/autostart/light-locker.desktop.old'
 sudo -E sh -c 'cp /usr/share/xfce4/backdrops/xubuntu-wallpaper.png /usr/share/xfce4/backdrops/xubuntu-wallpaper-old.png; cp ${HOME}/Pictures/Logo_COEX_2019_white_on_black.png /usr/share/xfce4/backdrops/xubuntu-wallpaper.png'
 sudo -E sh -c 'hostnamectl set-hostname clover-dev; sed -i "s/ubuntu/clover-dev clover-dev.local/g" /etc/hosts'
 echo "export ROS_HOSTNAME=\`hostname\`.local" >> ${HOME}/.bashrc

@@ -1,59 +1,15 @@
-diff --git a/include/gazebo_opticalflow_plugin.h b/include/gazebo_opticalflow_plugin.h
-index 4fbeab2..18a192b 100644
---- a/include/gazebo_opticalflow_plugin.h
-+++ b/include/gazebo_opticalflow_plugin.h
-@@ -40,7 +40,7 @@
- #include "flow_px4.hpp"
- 
- #define DEFAULT_RATE 20
--#define HAS_GYRO TRUE
-+#define HAS_GYRO true
- 
- using namespace cv;
- using namespace std;
-diff --git a/src/gazebo_geotagged_images_plugin.cpp b/src/gazebo_geotagged_images_plugin.cpp
-index 050558f..7029199 100644
---- a/src/gazebo_geotagged_images_plugin.cpp
-+++ b/src/gazebo_geotagged_images_plugin.cpp
-@@ -581,7 +581,8 @@ void GeotaggedImagesPlugin::_send_capture_status(struct sockaddr* srcaddr)
-         0,                                      // video status (Idle)
-         interval,                               // image interval
-         0,                                      // recording_time_s
--        available_mib);                         // available_capacity
-+        available_mib,                          // available_capacity
-+        _imageCounter);
-     _send_mavlink_message(&msg, srcaddr);
- }
- 
-@@ -591,6 +592,7 @@ void GeotaggedImagesPlugin::_handle_storage_info(const mavlink_message_t *pMsg,
-     float total_mib     = 0.0f;
-     float available_mib = 0.0f;
-     boost::filesystem::space_info si = boost::filesystem::space(".");
-+    const std::string storage_name = "SITL Camera Storage";
-     available_mib = (float)((double)si.available / (1024.0 * 1024.0));
-     total_mib     = (float)((double)si.capacity  / (1024.0 * 1024.0));
-     _send_cmd_ack(pMsg->sysid, pMsg->compid, MAV_CMD_REQUEST_STORAGE_INFORMATION, MAV_RESULT_ACCEPTED, srcaddr);
-@@ -608,7 +610,9 @@ void GeotaggedImagesPlugin::_handle_storage_info(const mavlink_message_t *pMsg,
-         total_mib - available_mib,          // used_capacity,
-         available_mib,
-         NAN,                                // read_speed,
--        NAN                                 // write_speed
-+        NAN,                                // write_speed
-+        STORAGE_TYPE_OTHER,                 // storage type
-+        storage_name.c_str()                // storage name
-     );
-     _send_mavlink_message(&msg, srcaddr);
- }
-diff --git a/src/gazebo_mavlink_interface.cpp b/src/gazebo_mavlink_interface.cpp
-index 5d29017..d4dd6a7 100644
---- a/src/gazebo_mavlink_interface.cpp
-+++ b/src/gazebo_mavlink_interface.cpp
-@@ -1039,7 +1039,7 @@ void GazeboMavlinkInterface::VisionCallback(OdomPtr& odom_message) {
- 
-     odom.time_usec = odom_message->time_usec();
- 
--    odom.frame_id = MAV_FRAME_VISION_NED;
-+    odom.frame_id = 16 /*MAV_FRAME_VISION_NED*/;
-     odom.child_frame_id = MAV_FRAME_BODY_FRD;
- 
-     odom.x = position.X();
+diff --git a/package.xml b/package.xml
+index ae0fb34..12f17b8 100644
+--- a/package.xml
++++ b/package.xml
+@@ -50,8 +50,8 @@
+   <build_depend>roscpp</build_depend>
+   <build_depend>sensor_msgs</build_depend>
+   <build_depend>std_msgs</build_depend>
+-  <build_depend>python-rospkg</build_depend>
+-  <build_depend>python-jinja2</build_depend>
++  <build_depend>python3-rospkg</build_depend>
++  <build_depend>python3-jinja2</build_depend>
+   <run_depend>eigen</run_depend>
+   <run_depend>gazebo_ros</run_depend>
+   <run_depend>geometry_msgs</run_depend>
