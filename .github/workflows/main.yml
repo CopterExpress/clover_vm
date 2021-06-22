@@ -19,7 +19,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install build-essential gcc make linux-headers-$(uname -r) virtualbox-6.0
           sudo usermod -aG vboxusers $(whoami)
-          mkdir output-virtualbox-iso && pushd output-virtualbox-iso && wget --progress=dot:giga https://github.com/sfalexrog/clever_vm/releases/download/v0.1_base_vm/clover-devel.ova && popd
+          mkdir output-virtualbox-iso
+          pushd output-virtualbox-iso
+          wget --progress=dot:giga https://github.com/sfalexrog/clever_vm/releases/download/v0.1_base_vm/clover-devel.ova
+          popd
           sudo apt install -y xvfb
       - name: Build
         run: xvfb-run ./build.sh
