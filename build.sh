@@ -9,9 +9,14 @@ set -e
 PACKER="./packer"
 if [ ! -f ${PACKER} ]; then
     echo "Packer not found; downloading v1.5.4 from Hashicorp"
-    wget --progress=dot:giga https://releases.hashicorp.com/packer/1.5.4/packer_1.5.4_darwin_amd64.zip
-    unzip packer_1.5.4_darwin_amd64.zip
-    rm packer_1.5.4_darwin_amd64.zip
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        OS=linux
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        OS=darwin
+    fi
+    wget --progress=dot:giga https://releases.hashicorp.com/packer/1.5.4/packer_1.5.4_${OS}_amd64.zip
+    unzip packer_1.5.4_${OS}_amd64.zip
+    rm packer_1.5.4_${OS}_amd64.zip
 fi
 
 echo "--- Using Packer version $(${PACKER} --version)"
