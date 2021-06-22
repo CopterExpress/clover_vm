@@ -123,7 +123,7 @@ gitbook build
 touch node_modules/CATKIN_IGNORE docs/CATKIN_IGNORE _book/CATKIN_IGNORE clover/www/CATKIN_IGNORE # ignore documentation files by catkin
 
 echo "--- Exposing examples"
-cp -R ${HOME}/catkin_ws/src/clover/builder/assets/examples ${HOME}/
+ln -s ${HOME}/catkin_ws/src/clover/builder/assets/examples ${HOME}/
 
 echo "--- Enabling roscore service"
 sed -i "s/pi/${USER}/g" ${HOME}/catkin_ws/src/clover/builder/assets/roscore.service
