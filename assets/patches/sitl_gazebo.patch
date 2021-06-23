@@ -1,16 +1,21 @@
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 18c59d6..6f0e577 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -97,7 +97,7 @@ if (BUILD_ROS_INTERFACE)
- endif()
+diff --git a/cmake/FindMAVLink.cmake b/cmake/FindMAVLink.cmake
+index 8de3079..c203237 100644
+--- a/cmake/FindMAVLink.cmake
++++ b/cmake/FindMAVLink.cmake
+@@ -46,13 +46,6 @@ find_path(_MAVLINK_INCLUDE_DIR
+     NO_CMAKE_SYSTEM_PATH
+     )
  
- # find MAVLink
--find_package(MAVLink)
-+find_package(MAVLink "2.0" EXACT REQUIRED)
- 
- # see if catkin was invoked to build this
- if (CATKIN_DEVEL_PREFIX)
+-# look specifically for the ROS version if no other was found
+-find_path(_MAVLINK_INCLUDE_DIR
+-   NAMES mavlink/v1.0/mavlink_types.h mavlink/v2.0/mavlink_types.h
+-   PATH_SUFFIXES include
+-   PATHS /opt/ros/${ROS_DISTRO}/
+-   )
+-
+ # read the version
+ if (EXISTS ${_MAVLINK_INCLUDE_DIR}/mavlink/config.h)
+     file(READ ${_MAVLINK_INCLUDE_DIR}/mavlink/config.h MAVLINK_CONFIG_FILE)
 diff --git a/package.xml b/package.xml
 index ae0fb34..12f17b8 100644
 --- a/package.xml
