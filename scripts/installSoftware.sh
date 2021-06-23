@@ -105,7 +105,7 @@ echo "source ${HOME}/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
 echo "--- Installing npm"
 cd ${HOME}
-NODE_VERSION=v14.17.1
+NODE_VERSION=v10.15.0 # GitBook won't install on newer version
 wget --progress=dot:giga https://nodejs.org/dist/$NODE_VERSION/node-$NODE_VERSION-linux-x64.tar.gz
 tar -xzf node-$NODE_VERSION-linux-x64.tar.gz
 sudo cp -R node-$NODE_VERSION-linux-x64/* /usr/local/
