@@ -11,14 +11,14 @@ before_install:
 - sudo apt install -y xvfb
 script:
 - "xvfb-run ./build.sh"
-deploy:
-  provider: s3
-  access_key_id: XOJXX4IOM66XN7VZAFYX
-  secret_access_key: $S3_SECRET_KEY
-  bucket: clovervm
-  local-dir: output-virtualbox-ovf
-  acl: public_read
-  on:
-    all_branches: true
-  skip_cleanup: true
-  endpoint: https://ams3.digitaloceanspaces.com
+# deploy:
+#   provider: s3
+#   access_key_id: XOJXX4IOM66XN7VZAFYX
+#   secret_access_key: $S3_SECRET_KEY
+#   bucket: clovervm
+#   local-dir: output-virtualbox-ovf
+#   acl: public_read
+#   on:
+#     all_branches: true
+#   skip_cleanup: true
+#   endpoint: https://ams3.digitaloceanspaces.com
