@@ -17,11 +17,6 @@ jobs:
           wget --progress=dot:giga https://clovervm.ams3.digitaloceanspaces.com/base-focal.ova -O output-virtualbox-iso/clover-devel.ova
       - name: Build
         run: ./build.sh
-      - uses: okalachev/upload-s3-action@master
-        name: Upload
-        with:
-          aws_key_id: ${{ secrets.S3_KEY }}
-          aws_secret_access_key: ${{ secrets.S3_KEY}}
-          aws_bucket: clovervm
-          aws_endpoint: https://ams3.digitaloceanspaces.com
-          source_dir: output-virtualbox-ovf
+      - name: Upload
+        run: AWS_ACCESS_KEY_ID=${{secrets.S3_KEY}} AWS_SECRET_ACCESS_KEY=${{secrets.S3_SECRET_KEY}} aws s3 sync . s3://clovervm/ --acl public-read --endpoint-url https://ams3.digitaloceanspaces.com
+        working-directory: output-virtualbox-ovf
