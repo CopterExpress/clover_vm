@@ -17,3 +17,13 @@ jobs:
           wget --progress=dot:giga https://clovervm.ams3.digitaloceanspaces.com/base-focal.ova -O output-virtualbox-iso/clover-devel.ova
       - name: Build
         run: ./build.sh
+      - uses: jakejarvis/s3-sync-action@master
+        name: Upload
+        with:
+          args: --acl public-read
+        env:
+          AWS_S3_BUCKET: clovervm
+          AWS_ACCESS_KEY_ID: ${{ secrets.S3_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_KEY }}
+          AWS_S3_ENDPOINT: https://ams3.digitaloceanspaces.com
+          SOURCE_DIR: output-virtualbox-ovf
