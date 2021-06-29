@@ -31,10 +31,10 @@ rosdep update
 # FIXME: PX4 needs pip to be installed
 # FIXME: python2 dependencies?
 echo "--- Downloading PX4 and installing its dependencies"
-git clone -b v1.10.1-clover https://github.com/CopterExpress/Firmware ${HOME}/Firmware
-sudo -E -S sh -c '${HOME}/Firmware/Tools/setup/ubuntu.sh'
-sudo -E -S sh -c 'echo "2" | update-alternatives --config java'
-sudo -E -S sed -i -e '/^assistive_technologies=/s/^/#/' /etc/java-*-openjdk/accessibility.properties
+git clone --recursive -b v1.11.1-clover https://github.com/CopterExpress/Firmware ${HOME}/Firmware
+# PX4 v1.11.1 script will happily run sudo by itself
+${HOME}/Firmware/Tools/setup/ubuntu.sh
+# Ubuntu 20.04 no longer sets assistive_technologies, thankfully
 
 echo "--- Prebuilding PX4 SITL configuration"
 make -C ${HOME}/Firmware px4_sitl
