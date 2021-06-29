@@ -32,11 +32,11 @@ ${PACKER} build ros_ide_vm.json
 
 echo "--- Marking the VM"
 
-if [[ $GITHUB_REF == refs/tags/*-rc* ]]; then
+# if [[ $GITHUB_REF == refs/tags/*-rc* ]]; then
     # remove rc label
-    VERSION=${GITHUB_REF#refs/tags/}
-    VERSION=${VERSION/-rc*/}
-elif [[ $GITHUB_REF == refs/tags/* ]]; then
+    # VERSION=${GITHUB_REF#refs/tags/}
+    # VERSION=${VERSION/-rc*/}
+if [[ $GITHUB_REF == refs/tags/* ]]; then
     VERSION=${GITHUB_REF#refs/tags/}
 else
     VERSION=$(git describe --always)
