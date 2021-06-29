@@ -65,7 +65,7 @@
   },
   {
     "type": "shell",
-    "script": "scripts/installSoftware.sh",
+    "script": "scripts/install_software.sh",
     "execute_command": "PASSWORD='{{user `password`}}' bash '{{.Path}}'"
   }]
 }
