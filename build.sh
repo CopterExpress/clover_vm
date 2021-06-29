@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -ex
 
 # FIXME: Use system Packer if possible
 #PACKER=$(which packer)
