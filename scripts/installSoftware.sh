@@ -105,11 +105,11 @@ echo "source ${HOME}/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
 echo "--- Installing npm"
 cd ${HOME}
-wget --progress=dot:giga https://nodejs.org/dist/v10.15.0/node-v10.15.0-linux-x64.tar.gz
-tar -xzf node-v10.15.0-linux-x64.tar.gz
-sudo cp -R node-v10.15.0-linux-x64/* /usr/local/
-rm -rf node-v10.15.0-linux-x64
-rm node-v10.15.0-linux-x64.tar.gz
+NODE_VERSION=v10.15.0 # GitBook won't install on newer version
+wget --progress=dot:giga https://nodejs.org/dist/$NODE_VERSION/node-$NODE_VERSION-linux-x64.tar.gz
+tar -xzf node-$NODE_VERSION-linux-x64.tar.gz
+sudo cp -R node-$NODE_VERSION-linux-x64/* /usr/local/
+rm -rf node-$NODE_VERSION-linux-x64 node-$NODE_VERSION-linux-x64.tar.gz
 echo "--- Reconfiguring npm to use local prefix"
 mkdir ${HOME}/.npm-global
 npm config set prefix "${HOME}/.npm-global"
@@ -117,8 +117,8 @@ export PATH=${HOME}/.npm-global/bin:$PATH
 echo 'export PATH='${HOME}'/.npm-global/bin:$PATH' >> ${HOME}/.bashrc
 echo "--- Installing gitbook and building docs"
 cd ${HOME}/catkin_ws/src/clover
-NPM_CONFIG_UNSAFE_PERM=true npm install gitbook-cli -g
-NPM_CONFIG_UNSAFE_PERM=true gitbook install
+builder/assets/install_gitbook.sh
+gitbook install
 gitbook build
 touch node_modules/CATKIN_IGNORE docs/CATKIN_IGNORE _book/CATKIN_IGNORE clover/www/CATKIN_IGNORE # ignore documentation files by catkin
 
