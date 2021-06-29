@@ -59,6 +59,15 @@ code --install-extension ms-vscode.cmake-tools
 code --install-extension ms-vscode.cpptools
 code --install-extension streetsidesoftware.code-spell-checker
 code --install-extension eamodio.gitlens
+
+echo "--- Add custom dictionary for VSCode"
+sudo -E sh -c 'apt-get install -y jq moreutils'
+mv /tmp/configs/clover.txt ${HOME}/.vscode/
+CODE_SETTINGS="$HOME/.config/Code/User/settings.json"
+cat $CODE_SETTINGS
+jq '."cSpell.customUserDictionaries"=[{name:"Clover", "path": "~/.vscode/clover.txt"}]' $CODE_SETTINGS | sponge $CODE_SETTINGS
+cat $CODE_SETTINGS
+
 echo "--- Installing pylint"
 /usr/bin/python3 -m pip install -U pylint --user
 
