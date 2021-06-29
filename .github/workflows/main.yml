@@ -18,5 +18,5 @@ jobs:
       - name: Build
         run: ./build.sh
       - name: Upload
-        run: AWS_ACCESS_KEY_ID=${{secrets.S3_KEY}} AWS_SECRET_ACCESS_KEY=${{secrets.S3_SECRET_KEY}} aws s3 sync . s3://clovervm/ --acl public-read --endpoint-url https://ams3.digitaloceanspaces.com
+        run: AWS_ACCESS_KEY_ID=${{secrets.S3_KEY}} AWS_SECRET_ACCESS_KEY=${{secrets.S3_SECRET_KEY}} aws s3 sync . s3://clovervm/ --acl public-read --endpoint-url https://ams3.digitaloceanspaces.com --no-progress
         working-directory: output-virtualbox-ovf
