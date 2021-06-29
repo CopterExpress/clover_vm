@@ -123,7 +123,7 @@ gitbook build
 touch node_modules/CATKIN_IGNORE docs/CATKIN_IGNORE _book/CATKIN_IGNORE clover/www/CATKIN_IGNORE # ignore documentation files by catkin
 
 echo "--- Exposing examples"
-ln -s ${HOME}/catkin_ws/src/clover/builder/assets/examples ${HOME}/
+ln -s ${HOME}/catkin_ws/src/clover/clover/examples ${HOME}/
 [[ -d ${HOME}/examples ]] # test symlink is valid
 
 echo "--- Enabling roscore service"
