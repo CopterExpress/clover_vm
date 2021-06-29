@@ -31,6 +31,7 @@ GIT_REV=$(git rev-parse --short HEAD)
 GIT_DESCRIBE=$(git describe --tags)
 VM_NAME="clover-devel_${GIT_DESCRIBE}.ova"
 mv ./output-virtualbox-ovf/clover-devel.ova ./output-virtualbox-ovf/${VM_NAME}
+ls -l output-virtualbox-ovf
 
 echo "--- All done!"
 
