@@ -32,9 +32,17 @@ ${PACKER} build ros_ide_vm.json
 
 echo "--- Marking the VM"
 
-GIT_REV=$(git rev-parse --short HEAD)
-GIT_DESCRIBE=$(git describe --always)
-VM_NAME="clover-devel_${GIT_DESCRIBE}.ova"
+if [[ $GITHUB_REF == refs/tags/*-rc* ]]; then
+    # remove rc label
+    VERSION=${GITHUB_REF#refs/tags/}
+    VERSION=${VERSION/-rc*/}
+elif [[ $GITHUB_REF == refs/tags/* ]]; then
+    VERSION=${GITHUB_REF#refs/tags/}
+else
+    VERSION=$(git describe --always)
+fi
+
+VM_NAME="clover-devel_${VERSION}.ova"
 mv ./output-virtualbox-ovf/clover-devel.ova ./output-virtualbox-ovf/${VM_NAME}
 ls -l output-virtualbox-ovf
 
