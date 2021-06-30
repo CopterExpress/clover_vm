@@ -2,7 +2,7 @@
 
 The generator of Clover developer virtual machine image (`.ova` file) to simplify working with Clover and Clover simulation.
 
-Download the latest image in [Releases](https://github.com/CopterExpress/clover_vm/releases) section.
+Download the latest image in [Releases](https://github.com/CopterExpress/clover_vm/releases/latest) section.
 
 <img src=https://clover.coex.tech/assets/simulator.jpg width=600>
 
