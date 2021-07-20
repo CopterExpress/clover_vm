@@ -1,3 +1,16 @@
+diff --git a/include/gazebo_opticalflow_plugin.h b/include/gazebo_opticalflow_plugin.h
+index 4fbeab2..18a192b 100644
+--- a/include/gazebo_opticalflow_plugin.h
++++ b/include/gazebo_opticalflow_plugin.h
+@@ -40,7 +40,7 @@
+ #include "flow_px4.hpp"
+ 
+ #define DEFAULT_RATE 20
+-#define HAS_GYRO TRUE
++#define HAS_GYRO true
+ 
+ using namespace cv;
+ using namespace std;
 diff --git a/cmake/FindMAVLink.cmake b/cmake/FindMAVLink.cmake
 index 8de3079..3fdae02 100644
 --- a/cmake/FindMAVLink.cmake
