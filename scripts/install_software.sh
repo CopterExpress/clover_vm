@@ -43,6 +43,7 @@ cd ${HOME}/Firmware/Tools/sitl_gazebo
 patch -p1 < /tmp/patches/sitl_gazebo.patch
 echo 'export SVGA_VGPU10=0' >> ${HOME}/Firmware/Tools/setup_gazebo.bash
 
+echo "source /usr/share/gazebo/setup.sh" >> ~/.bashrc
 echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 
 echo "--- Installing Visual Studio Code"
