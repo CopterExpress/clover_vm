@@ -173,7 +173,7 @@ python2 --version
 python3 --version
 # ipython --version
 ipython3 --version
-gazebo --version
+gazebo --version || true # FIXME: Gazebo exist with 255 on --version somehow
 node -v
 npm -v
 byobu --version
