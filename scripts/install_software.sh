@@ -168,7 +168,39 @@ echo "--- Cleaning up"
 sudo -E sh -c 'apt-get -y autoremove; apt-get -y autoclean; apt-get -y clean; fstrim -v /'
 
 echo "--- Validating"
-source $HOME/catkin_ws/devel/setup.bash
+# python --version # python-is-python3
+python2 --version
+python3 --version
+# ipython --version
+ipython3 --version
+gazebo --version
+node -v
+npm -v
+byobu --version
+git --version
+vim --version
+pip --version
+pip3 --version
+monkey --version
+systemctl --version
 
+roscore -h
+rosversion clover
+rosversion aruco_pose
+rosversion mavros
+rosversion mavros_extras
+rosversion ws281x
+rosversion led_msgs
+rosversion dynamic_reconfigure
+rosversion tf2_web_republisher
+# rosversion compressed_image_transport
+# rosversion rosbridge_suite
+rosversion rosserial
+rosversion cv_camera
+rosversion web_video_server
+rosversion rosshow
+rosversion nodelet
+
+source $HOME/catkin_ws/devel/setup.bash
 echo "Trying running the Gazebo simulator, check the output"
 timeout --preserve-status 30 roslaunch clover_simulation simulator.launch gui:=false --screen
