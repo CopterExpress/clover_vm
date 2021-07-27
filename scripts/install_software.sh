@@ -166,3 +166,9 @@ chmod a+x ${HOME}/Desktop/*
 
 echo "--- Cleaning up"
 sudo -E sh -c 'apt-get -y autoremove; apt-get -y autoclean; apt-get -y clean; fstrim -v /'
+
+echo "--- Validating"
+source $HOME/catkin_ws/devel/setup.bash
+
+echo "Trying running the Gazebo simulator, check the output"
+timeout --preserve-status 30 roslaunch clover_simulation simulator.launch gui:=false --screen
