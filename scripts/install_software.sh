@@ -199,7 +199,6 @@ rosversion tf2_web_republisher
 # rosversion rosbridge_suite
 rosversion cv_camera
 rosversion web_video_server
-rosversion rosshow
 rosversion nodelet
 
 echo "Trying running the Gazebo simulator, check the output"
