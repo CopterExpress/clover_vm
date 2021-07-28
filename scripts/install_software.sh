@@ -32,7 +32,7 @@ rosdep update
 # FIXME: python2 dependencies?
 echo "--- Downloading PX4 and installing its dependencies"
 
-# v1.11.1, TODO: update to v1.12
+# v1.11.1, TODO: update to v1.12, remove Gazebo downgrade
 #git clone --recursive -b v1.11.1-clover https://github.com/CopterExpress/Firmware ${HOME}/Firmware
 ## PX4 v1.11.1 script will happily run sudo by itself
 #${HOME}/Firmware/Tools/setup/ubuntu.sh
@@ -41,7 +41,6 @@ echo "--- Downloading PX4 and installing its dependencies"
 # v1.10.1:
 git clone -b v1.10.1-clover https://github.com/CopterExpress/Firmware ${HOME}/Firmware
 sudo -E sh -c 'apt-get update; apt-get install -y python3-pip'
-sudo -E sh -c 'apt-get update; apt-get install -y gazebo9'
 sudo -E -S sh -c '${HOME}/Firmware/Tools/setup/ubuntu.sh'
 sudo -E -S sh -c 'echo "2" | update-alternatives --config java'
 sudo -E -S sed -i -e '/^assistive_technologies=/s/^/#/' /etc/java-*-openjdk/accessibility.properties
@@ -112,6 +111,8 @@ sudo /usr/bin/python3 -m pip install -r ${HOME}/catkin_ws/src/clover/clover/requ
 source /opt/ros/noetic/setup.bash
 cd ${HOME}/catkin_ws && catkin_make
 echo "source ${HOME}/catkin_ws/devel/setup.bash" >> ~/.bashrc
+
+sudo -E sh -c 'apt-get update; apt-get install -y gazebo9' # downgrade Gazebo to 9 to make PX4 v1.10.1 work
 
 echo "--- Installing npm"
 cd ${HOME}
