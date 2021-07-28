@@ -197,7 +197,6 @@ rosversion dynamic_reconfigure
 rosversion tf2_web_republisher
 # rosversion compressed_image_transport
 # rosversion rosbridge_suite
-rosversion rosserial
 rosversion cv_camera
 rosversion web_video_server
 rosversion rosshow
