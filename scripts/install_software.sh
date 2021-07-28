@@ -185,6 +185,7 @@ pip3 --version
 monkey --version
 systemctl --version
 
+source $HOME/catkin_ws/devel/setup.bash
 roscore -h
 rosversion clover
 rosversion aruco_pose
@@ -202,6 +203,5 @@ rosversion web_video_server
 rosversion rosshow
 rosversion nodelet
 
-source $HOME/catkin_ws/devel/setup.bash
 echo "Trying running the Gazebo simulator, check the output"
 timeout --preserve-status 30 roslaunch clover_simulation simulator.launch gui:=false --screen
