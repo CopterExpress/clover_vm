@@ -180,6 +180,7 @@ systemctl --version
 
 source $HOME/catkin_ws/devel/setup.bash
 roscore -h
+rosversion px4
 rosversion clover
 rosversion aruco_pose
 rosversion mavros
