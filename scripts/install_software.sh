@@ -167,7 +167,7 @@ python2 --version
 python3 --version
 # ipython --version
 ipython3 --version
-gazebo --version || true # FIXME: Gazebo exist with 255 on --version somehow
+gazebo --version || true # FIXME: Gazebo exits with 255 on --version somehow
 node -v
 npm -v
 byobu --version
@@ -177,6 +177,7 @@ pip --version
 pip3 --version
 monkey --version
 systemctl --version
+# TODO: add Python tests
 
 source $HOME/catkin_ws/devel/setup.bash
 roscore -h
