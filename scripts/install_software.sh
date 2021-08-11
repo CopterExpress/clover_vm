@@ -106,6 +106,9 @@ source /opt/ros/noetic/setup.bash
 cd ${HOME}/catkin_ws && catkin_make
 echo "source ${HOME}/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
+echo "--- Adding Clover vehicle startup script to PX4"
+ln -s "$(catkin_find clover_simulation airframes)/*" $HOME/PX4-Autopilot/ROMFS/px4fmu_common/init.d-posix/airframes/
+
 echo "--- Installing npm"
 cd ${HOME}
 NODE_VERSION=v10.15.0 # GitBook won't install on newer version
