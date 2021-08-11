@@ -31,17 +31,17 @@ rosdep update
 # FIXME: PX4 needs pip to be installed
 # FIXME: python2 dependencies?
 echo "--- Downloading PX4 and installing its dependencies"
-git clone --recursive -b v1.11.1-clover https://github.com/CopterExpress/Firmware ${HOME}/Firmware
+git clone --recursive --depth 1 --branch v1.12.0 https://github.com/PX4/PX4-Autopilot.git ${HOME}/PX4-Autopilot.git
 # PX4 v1.11.1 script will happily run sudo by itself
-${HOME}/Firmware/Tools/setup/ubuntu.sh
+${HOME}/PX4-Autopilot/Tools/setup/ubuntu.sh
 # Ubuntu 20.04 no longer sets assistive_technologies, thankfully
 
 echo "--- Prebuilding PX4 SITL configuration"
-make -C ${HOME}/Firmware px4_sitl
+make -C ${HOME}/PX4-Autopilot px4_sitl
 echo "--- Patching gazebo plugins for SITL"
-cd ${HOME}/Firmware/Tools/sitl_gazebo
+cd ${HOME}/PX4-Autopilot/Tools/sitl_gazebo
 patch -p1 < /tmp/patches/sitl_gazebo.patch
-echo 'export SVGA_VGPU10=0' >> ${HOME}/Firmware/Tools/setup_gazebo.bash
+echo 'export SVGA_VGPU10=0' >> ${HOME}/PX4-Autopilot/Tools/setup_gazebo.bash
 
 echo "source /usr/share/gazebo/setup.sh" >> ~/.bashrc
 echo "export SVGA_VGPU10=0" >> ~/.bashrc
@@ -97,8 +97,8 @@ git clone https://github.com/CopterExpress/ros_led ${HOME}/catkin_ws/src/ros_led
 # These packages are missing from Noetic release, but are required for sitl_gazebo
 git clone https://github.com/ethz-asl/mav_comm ${HOME}/catkin_ws/src/mav_comm
 # Make PX4 and Gazebo plugins visible in the workspace
-ln -s ${HOME}/Firmware ${HOME}/catkin_ws/src/Firmware
-ln -s ${HOME}/Firmware/Tools/sitl_gazebo ${HOME}/catkin_ws/src/sitl_gazebo
+ln -s ${HOME}/PX4-Autopilot ${HOME}/catkin_ws/src/PX4-Autopilot
+ln -s ${HOME}/PX4-Autopilot/Tools/sitl_gazebo ${HOME}/catkin_ws/src/sitl_gazebo
 rosdep install --from-paths ${HOME}/catkin_ws/src --ignore-src --rosdistro noetic -y
 sudo /opt/ros/noetic/lib/mavros/install_geographiclib_datasets.sh
 sudo /usr/bin/python3 -m pip install -r ${HOME}/catkin_ws/src/clover/clover/requirements.txt
