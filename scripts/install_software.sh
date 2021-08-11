@@ -106,6 +106,8 @@ source /opt/ros/noetic/setup.bash
 cd ${HOME}/catkin_ws && catkin_make
 echo "source ${HOME}/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
+source $HOME/catkin_ws/devel/setup.bash
+
 echo "--- Adding Clover vehicle startup script to PX4"
 ln -s "$(catkin_find clover_simulation airframes)/*" $HOME/PX4-Autopilot/ROMFS/px4fmu_common/init.d-posix/airframes/
 
@@ -182,7 +184,6 @@ monkey --version
 systemctl --version
 # TODO: add Python tests
 
-source $HOME/catkin_ws/devel/setup.bash
 roscore -h
 rosversion px4
 rosversion clover
