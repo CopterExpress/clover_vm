@@ -39,8 +39,8 @@ ${HOME}/PX4-Autopilot/Tools/setup/ubuntu.sh
 echo "--- Prebuilding PX4 SITL configuration"
 make -C ${HOME}/PX4-Autopilot px4_sitl
 echo "--- Patching gazebo plugins for SITL"
-cd ${HOME}/PX4-Autopilot/Tools/sitl_gazebo
-patch -p1 < /tmp/patches/sitl_gazebo.patch
+# cd ${HOME}/PX4-Autopilot/Tools/sitl_gazebo
+# patch -p1 < /tmp/patches/sitl_gazebo.patch
 echo 'export SVGA_VGPU10=0' >> ${HOME}/PX4-Autopilot/Tools/setup_gazebo.bash
 
 echo "source /usr/share/gazebo/setup.sh" >> ~/.bashrc
