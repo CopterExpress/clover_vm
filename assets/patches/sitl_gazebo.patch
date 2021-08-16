@@ -6,7 +6,7 @@ index 8de3079..3fdae02 100644
      ${CMAKE_SOURCE_DIR}/mavlink/
      ../../mavlink/
      ../mavlink/
-+    $ENV{HOME}/Firmware/mavlink/include
++    $ENV{HOME}/PX4-Autopilot/mavlink/include
      ${CATKIN_DEVEL_PREFIX}/
      )
  
