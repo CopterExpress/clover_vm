@@ -35,6 +35,7 @@ git clone --recursive --depth 1 --branch v1.12.0 https://github.com/PX4/PX4-Auto
 # PX4 v1.11.1 script will happily run sudo by itself
 ${HOME}/PX4-Autopilot/Tools/setup/ubuntu.sh
 # Ubuntu 20.04 no longer sets assistive_technologies, thankfully
+sudo -E sh -c 'apt-get install -y ant openjdk-11-jdk' # Additional packages for jMAVSim
 
 echo "--- Prebuilding PX4 SITL configuration"
 make -C ${HOME}/PX4-Autopilot px4_sitl
