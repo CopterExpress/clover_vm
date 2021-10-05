@@ -93,10 +93,10 @@ EOF'
 sudo apt-get update
 rosdep update
 mkdir -p ${HOME}/catkin_ws/src
-git clone https://github.com/CopterExpress/clover ${HOME}/catkin_ws/src/clover
-git clone https://github.com/CopterExpress/ros_led ${HOME}/catkin_ws/src/ros_led
+git clone --depth 1 https://github.com/CopterExpress/clover ${HOME}/catkin_ws/src/clover
+git clone --depth 1 https://github.com/CopterExpress/ros_led ${HOME}/catkin_ws/src/ros_led
 # These packages are missing from Noetic release, but are required for sitl_gazebo
-git clone https://github.com/ethz-asl/mav_comm ${HOME}/catkin_ws/src/mav_comm
+git clone --depth 1 https://github.com/ethz-asl/mav_comm ${HOME}/catkin_ws/src/mav_comm
 # Make PX4 and Gazebo plugins visible in the workspace
 ln -s ${HOME}/PX4-Autopilot ${HOME}/catkin_ws/src/PX4-Autopilot
 ln -s ${HOME}/PX4-Autopilot/Tools/sitl_gazebo ${HOME}/catkin_ws/src/sitl_gazebo
