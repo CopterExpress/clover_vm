@@ -152,6 +152,7 @@ sudo -E sh -c 'apt-get update; apt-get install -y firefox'
 echo "--- Installing Monkey web server"
 sudo apt-get install -y /tmp/packages/monkey_1.6.9-1_amd64.deb
 sed "s/pi/${USER}/g" ${HOME}/catkin_ws/src/clover/builder/assets/monkey | sudo tee /etc/monkey/sites/default
+sed -i 's/SymLink Off/SymLink On/' /etc/monkey/monkey.conf
 sudo cp ${HOME}/catkin_ws/src/clover/builder/assets/monkey.service /etc/systemd/system/monkey.service
 sudo systemctl enable monkey
 
