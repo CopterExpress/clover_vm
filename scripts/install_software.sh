@@ -186,6 +186,9 @@ rosversion cv_camera
 rosversion web_video_server
 rosversion nodelet
 
+echo "--- Versions of all installed ROS packages"
+rospack list-names | while read line; do echo $line `rosversion $line`; done
+
 echo "Trying running the Gazebo simulator, check the output"
 timeout --preserve-status 30 roslaunch clover_simulation simulator.launch gui:=false --screen
 
