@@ -186,6 +186,9 @@ rosversion cv_camera
 rosversion web_video_server
 rosversion nodelet
 
+echo "--- Run Clover's Python libraries validation"
+$HOME/catkin_ws/src/clover/builder/test/tests_py3.py
+
 echo "--- Versions of all installed ROS packages"
 set +x
 rospack list-names | while read line; do echo $line `rosversion $line`; done
