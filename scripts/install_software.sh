@@ -93,8 +93,8 @@ code --install-extension ms-vscode.cpptools
 code --install-extension streetsidesoftware.code-spell-checker
 code --install-extension eamodio.gitlens
 
-echo "--- Installing pylint"
-/usr/bin/python3 -m pip install -U pylint --user
+echo "--- Installing additional Python packages"
+/usr/bin/python3 -m pip install -U pylint pyzbar --user
 
 echo "--- Exposing examples"
 ln -s ${HOME}/catkin_ws/src/clover/clover/examples ${HOME}/
