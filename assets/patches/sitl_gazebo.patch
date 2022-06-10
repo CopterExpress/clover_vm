@@ -1,28 +1,36 @@
-diff --git a/cmake/FindMAVLink.cmake b/cmake/FindMAVLink.cmake
-index 8de3079..3fdae02 100644
---- a/cmake/FindMAVLink.cmake
-+++ b/cmake/FindMAVLink.cmake
-@@ -19,6 +19,7 @@ set(_MAVLINK_EXTRA_SEARCH_HINTS
-     ${CMAKE_SOURCE_DIR}/mavlink/
-     ../../mavlink/
-     ../mavlink/
-+    $ENV{HOME}/PX4-Autopilot/mavlink/include
-     ${CATKIN_DEVEL_PREFIX}/
-     )
+diff --git a/src/gazebo_gps_plugin.cpp b/src/gazebo_gps_plugin.cpp
+index 1195f5e..6540596 100644
+--- a/src/gazebo_gps_plugin.cpp
++++ b/src/gazebo_gps_plugin.cpp
+@@ -41,7 +41,6 @@ GpsPlugin::~GpsPlugin()
+   if (updateSensorConnection_)
+     updateSensorConnection_->~Connection();
+   parentSensor_.reset();
+-  world_->Reset();
+ }
  
+ void GpsPlugin::Load(sensors::SensorPtr _parent, sdf::ElementPtr _sdf)
+diff --git a/src/gazebo_groundtruth_plugin.cpp b/src/gazebo_groundtruth_plugin.cpp
+index 441ebd9..dd66e12 100644
+--- a/src/gazebo_groundtruth_plugin.cpp
++++ b/src/gazebo_groundtruth_plugin.cpp
+@@ -51,7 +51,6 @@ GroundtruthPlugin::~GroundtruthPlugin()
+ {
+   if (updateConnection_)
+     updateConnection_->~Connection();
+-  world_->Reset();
+ }
  
-diff --git a/package.xml b/package.xml
-index ae0fb34..12f17b8 100644
---- a/package.xml
-+++ b/package.xml
-@@ -50,8 +50,8 @@
-   <build_depend>roscpp</build_depend>
-   <build_depend>sensor_msgs</build_depend>
-   <build_depend>std_msgs</build_depend>
--  <build_depend>python-rospkg</build_depend>
--  <build_depend>python-jinja2</build_depend>
-+  <build_depend>python3-rospkg</build_depend>
-+  <build_depend>python3-jinja2</build_depend>
-   <run_depend>eigen</run_depend>
-   <run_depend>gazebo_ros</run_depend>
-   <run_depend>geometry_msgs</run_depend>
+ void GroundtruthPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
+diff --git a/src/gazebo_lidar_plugin.cpp b/src/gazebo_lidar_plugin.cpp
+index 38374e6..1b2fbf8 100644
+--- a/src/gazebo_lidar_plugin.cpp
++++ b/src/gazebo_lidar_plugin.cpp
+@@ -47,7 +47,6 @@ LidarPlugin::~LidarPlugin()
+   newLaserScansConnection_->~Connection();
+   newLaserScansConnection_.reset();
+   parentSensor_.reset();
+-  world_->Reset();
+ }
+ 
+ /////////////////////////////////////////////////

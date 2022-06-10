@@ -65,6 +65,11 @@ echo "--- Installing PX4 dependencies"
 pip3 install --user toml
 sudo -E sh -c 'apt-get install -y ant openjdk-11-jdk' # Additional packages for jMAVSim
 
+echo "--- Patching mavlink_sitl_gazebo"
+# See https://github.com/PX4/PX4-SITL_gazebo/pull/872
+cd ~/PX4-Autopilot/Tools/sitl_gazebo
+patch -p1 < /tmp/patches/mavlink_sitl_gazebo.patch
+
 echo "--- Addding Gazebo initialization to bashrc"
 echo "source /usr/share/gazebo/setup.sh" >> ~/.bashrc
 echo "export SVGA_VGPU10=0" >> ~/.bashrc
