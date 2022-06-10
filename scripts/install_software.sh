@@ -68,7 +68,7 @@ sudo -E sh -c 'apt-get install -y ant openjdk-11-jdk' # Additional packages for 
 echo "--- Patching mavlink_sitl_gazebo"
 # See https://github.com/PX4/PX4-SITL_gazebo/pull/872
 cd ~/PX4-Autopilot/Tools/sitl_gazebo
-patch -p1 < /tmp/patches/mavlink_sitl_gazebo.patch
+patch -p1 < /tmp/patches/sitl_gazebo.patch
 
 echo "--- Addding Gazebo initialization to bashrc"
 echo "source /usr/share/gazebo/setup.sh" >> ~/.bashrc
