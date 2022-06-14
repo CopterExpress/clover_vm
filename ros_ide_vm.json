@@ -64,6 +64,11 @@
     "destination": "/tmp"
   },
   {
+    "type": "file",
+    "source": "{{user `assetsDir`}}/etc",
+    "destination": "/tmp"
+  },
+  {
     "type": "shell",
     "script": "scripts/install_software.sh",
     "execute_command": "PASSWORD='{{user `password`}}' bash '{{.Path}}'"
