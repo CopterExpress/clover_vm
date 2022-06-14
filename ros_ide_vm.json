@@ -65,7 +65,7 @@
   },
   {
     "type": "file",
-    "source": "{{user `assetsDir`}}/etc",
+    "source": "{{user `assetsDir`}}/version",
     "destination": "/tmp"
   },
   {
