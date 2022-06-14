@@ -65,8 +65,8 @@
   },
   {
     "type": "file",
-    "source": "{{user `assetsDir`}}/version",
-    "destination": "/tmp"
+    "source": "{{user `assetsDir`}}/clover_vm_version",
+    "destination": "/etc"
   },
   {
     "type": "shell",

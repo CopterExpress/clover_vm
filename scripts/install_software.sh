@@ -158,6 +158,7 @@ echo "--- Cleaning up"
 sudo -E sh -c 'apt-get -y autoremove; apt-get -y autoclean; apt-get -y clean; fstrim -v /'
 
 echo "--- Validating"
+cat /etc/clover_vm_version || true
 # python --version # python-is-python3
 python2 --version
 python3 --version
