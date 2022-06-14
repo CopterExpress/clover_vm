@@ -155,7 +155,7 @@ echo "export ROS_HOSTNAME=\`hostname\`.local" >> ${HOME}/.bashrc
 chmod a+x ${HOME}/Desktop/*
 
 echo "--- Creating /etc/clover_vm_version"
-mv /tmp/clover_vm_version /etc/clover_vm_version
+sudo -E sh -c 'mv /tmp/clover_vm_version /etc/clover_vm_version'
 cat /etc/clover_vm_version
 
 echo "--- Cleaning up"
