@@ -154,6 +154,10 @@ sudo -E sh -c 'hostnamectl set-hostname clover-dev; sed -i "s/ubuntu/clover-dev 
 echo "export ROS_HOSTNAME=\`hostname\`.local" >> ${HOME}/.bashrc
 chmod a+x ${HOME}/Desktop/*
 
+echo "--- Creating /etc/clover_vm_version"
+sudo -E sh -c 'mv /tmp/clover_vm_version /etc/clover_vm_version'
+cat /etc/clover_vm_version
+
 echo "--- Cleaning up"
 sudo -E sh -c 'apt-get -y autoremove; apt-get -y autoclean; apt-get -y clean; fstrim -v /'
 

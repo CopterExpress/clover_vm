@@ -5,6 +5,18 @@ set -ex
 # FIXME: Use system Packer if possible
 #PACKER=$(which packer)
 
+echo "--- Fill version asset"
+# if [[ $GITHUB_REF == refs/tags/*-rc* ]]; then
+    # remove rc label
+    # VERSION=${GITHUB_REF#refs/tags/}
+    # VERSION=${VERSION/-rc*/}
+if [[ $GITHUB_REF == refs/tags/* ]]; then
+    VERSION=${GITHUB_REF#refs/tags/}
+else
+    VERSION=$(git describe --always)
+fi
+echo $VERSION > assets/clover_vm_version
+
 #if [ "x${PACKER}" == "x" ]; then
 PACKER="./packer"
 if [ ! -f ${PACKER} ]; then
@@ -31,16 +43,6 @@ echo "--- Building extended image"
 ${PACKER} build ros_ide_vm.json
 
 echo "--- Marking the VM"
-
-# if [[ $GITHUB_REF == refs/tags/*-rc* ]]; then
-    # remove rc label
-    # VERSION=${GITHUB_REF#refs/tags/}
-    # VERSION=${VERSION/-rc*/}
-if [[ $GITHUB_REF == refs/tags/* ]]; then
-    VERSION=${GITHUB_REF#refs/tags/}
-else
-    VERSION=$(git describe --always)
-fi
 
 VM_NAME="clover-devel_${VERSION}.ova"
 mv ./output-virtualbox-ovf/clover-devel.ova ./output-virtualbox-ovf/${VM_NAME}
