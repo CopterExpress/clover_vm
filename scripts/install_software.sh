@@ -88,7 +88,7 @@ ln -s "." build/mavlink/mavlink
 rm build/CMakeCache.txt
 
 echo "--- Building the workspace"
-catkin_make
+catkin_make --force-cmake
 
 echo "--- Installing Visual Studio Code"
 sudo -E sh -c 'apt-get update; apt-get install -y curl'
