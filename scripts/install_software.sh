@@ -81,10 +81,12 @@ ln -s ~/catkin_ws/src/clover/clover_simulation/airframes/* ~/PX4-Autopilot/ROMFS
 echo "--- Installing geographiclib datasets"
 sudo -E sh -c '/opt/ros/noetic/lib/mavros/install_geographiclib_datasets.sh'
 
-echo "--- Building the workspace"
+echo "--- Build mavlink and fix issues"
 cd ~/catkin_ws
 catkin_make mavlink_c_generate
 ln -s "." ~/catkin_ws/build/mavlink/mavlink
+
+echo "--- Building the workspace"
 catkin_make
 
 echo "--- Installing Visual Studio Code"
