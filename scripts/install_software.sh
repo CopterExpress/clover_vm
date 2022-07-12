@@ -84,6 +84,7 @@ sudo -E sh -c '/opt/ros/noetic/lib/mavros/install_geographiclib_datasets.sh'
 echo "--- Building the workspace"
 cd ~/catkin_ws
 catkin_make mavlink_c_generate
+ln -s "." ~/catkin_ws/build/mavlink/mavlink
 catkin_make
 
 echo "--- Installing Visual Studio Code"
