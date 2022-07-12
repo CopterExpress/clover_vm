@@ -85,6 +85,7 @@ echo "--- Build mavlink and fix issues"
 cd ~/catkin_ws
 catkin_make mavlink_c_generate
 ln -s "." ~/catkin_ws/build/mavlink/mavlink
+rm catkin_ws/build/CMakeCache.txt
 
 echo "--- Building the workspace"
 catkin_make
