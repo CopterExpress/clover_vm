@@ -81,14 +81,13 @@ ln -s ~/catkin_ws/src/clover/clover_simulation/airframes/* ~/PX4-Autopilot/ROMFS
 echo "--- Installing geographiclib datasets"
 sudo -E sh -c '/opt/ros/noetic/lib/mavros/install_geographiclib_datasets.sh'
 
-echo "--- Build mavlink and fix issues"
-cd ~/catkin_ws
-catkin_make mavlink_c_generate
-ln -s "." build/mavlink/mavlink
-rm build/CMakeCache.txt
+echo "--- Build PX4"
+cd ~/PX4-Firmware
+make px4_sitl
 
 echo "--- Building the workspace"
-catkin_make --force-cmake
+cd ~/catkin_ws
+catkin_make
 
 echo "--- Installing Visual Studio Code"
 sudo -E sh -c 'apt-get update; apt-get install -y curl'
