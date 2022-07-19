@@ -204,7 +204,7 @@ rospack list-names | while read line; do echo $line `rosversion $line`; done
 set -x
 
 echo "--- Test building the firmware"
-sudo -E sh -c 'apt-get install arm-none-eabi-gcc'
+sudo -E sh -c 'apt-get install gcc-arm-none-eabi'
 cd ~/PX4-Autopilot
 make px4_fmu-v4_default
 
