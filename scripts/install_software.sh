@@ -203,6 +203,10 @@ set +x
 rospack list-names | while read line; do echo $line `rosversion $line`; done
 set -x
 
+echo "--- Test building the firmware"
+cd ~/PX4-Autopilot
+make px4_fmu-v4_default
+
 echo "Trying running the Gazebo simulator, check the output"
 timeout --preserve-status 30 roslaunch clover_simulation simulator.launch gui:=false --screen
 
