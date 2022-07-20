@@ -37,7 +37,7 @@ rosdep update
 echo "--- Creating Catkin workspace"
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws
-catkin_make
+catkin_make --force-cmake
 echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 source ~/catkin_ws/devel/setup.bash
 
