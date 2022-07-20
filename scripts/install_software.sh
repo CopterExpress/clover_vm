@@ -86,7 +86,7 @@ cd ~/PX4-Autopilot
 make px4_sitl
 
 echo "--- Building the workspace"
-rm -rf /opt/ros/noetic/include/mavlink
+sudo -E sh -c 'rm -rf /opt/ros/noetic/include/mavlink'
 cd ~/catkin_ws
 catkin_make
 
