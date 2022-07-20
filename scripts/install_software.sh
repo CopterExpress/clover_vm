@@ -82,7 +82,7 @@ echo "--- Installing geographiclib datasets"
 sudo -E sh -c '/opt/ros/noetic/lib/mavros/install_geographiclib_datasets.sh'
 
 echo "--- Build PX4"
-cd ~/PX4-Firmware
+cd ~/PX4-Autopilot
 make px4_sitl
 
 echo "--- Building the workspace"
