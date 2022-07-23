@@ -37,7 +37,7 @@ rosdep update
 echo "--- Creating Catkin workspace"
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws
-catkin_make --force-cmake
+catkin_make
 echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 source ~/catkin_ws/devel/setup.bash
 
@@ -87,6 +87,7 @@ make px4_sitl
 
 echo "--- Building the workspace"
 sudo -E sh -c 'rm -rf /opt/ros/noetic/include/mavlink'
+echo 'include_directories("${CMAKE_SOURCE_DIR}/PX4-Autopilot/build/px4_sitl_default/mavlink")' >> ~/catkin_ws/src/clover/clover_simulation/CMakeLists.txt
 cd ~/catkin_ws
 catkin_make
 
