@@ -88,7 +88,7 @@ make px4_sitl
 echo "--- Building the workspace"
 # sudo -E sh -c 'rm -rf /opt/ros/noetic/include/mavlink'
 ls ~/catkin_ws/src/PX4-Autopilot/build/px4_sitl_default/mavlink
-echo 'include_directories("/home/clover/PX4-Autopilot/build/px4_sitl_default/mavlink")' >> ~/catkin_ws/src/sitl_gazebo/CMakeLists.txt
+echo 'target_include_directories(sitl_gazebo PUBLIC "/home/clover/PX4-Autopilot/build/px4_sitl_default/mavlink")' >> ~/catkin_ws/src/clover/clover_simulation/CMakeLists.txt
 cd ~/catkin_ws
 catkin_make
 
