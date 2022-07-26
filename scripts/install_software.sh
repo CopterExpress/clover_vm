@@ -89,6 +89,7 @@ echo "--- Building the workspace"
 # sudo -E sh -c 'rm -rf /opt/ros/noetic/include/mavlink'
 ls ~/catkin_ws/src/PX4-Autopilot/build/px4_sitl_default/mavlink
 echo 'include_directories("/home/clover/PX4-Autopilot/build/px4_sitl_default/mavlink")' >> ~/catkin_ws/src/sitl_gazebo/CMakeLists.txt
+sed -i 's|#include <mavlink/mavlink_types.h>|#include <mavlink_types.h>|' ~/catkin_ws/src/PX4-Autopilot/src/modules/mavlink/mavlink_bridge_header.h
 cd ~/catkin_ws
 catkin_make mavlink_c_generate
 catkin_make
