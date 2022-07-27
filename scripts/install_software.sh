@@ -87,7 +87,7 @@ make px4_sitl
 
 echo "--- Fix issues with finding mavlnk"
 cd ~/catkin_ws
-mkdir -p build/mavlink
+catkin_make mavlink_c_generate --pkg=px4
 ln -s "." build/mavlink/mavlink
 
 echo "--- Building the workspace"
