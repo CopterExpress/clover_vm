@@ -87,11 +87,11 @@ make px4_sitl
 
 echo "--- Build mavlink"
 cd ~/catkin_ws
-catkin_make mavlink_c_generate
+catkin_make mavlink_c_generate -DCATKIN_WHITELIST_PACKAGES="px4"  # Prebuilt px4's mavlink to force mavlink_sitl_gazebo use it
 ln -s "." build/mavlink/mavlink  # fix https://github.com/PX4/PX4-Autopilot/pull/19964
 
 echo "--- Building the workspace"
-catkin_make
+catkin_make -DCATKIN_WHITELIST_PACKAGES=""
 
 echo "--- Installing Visual Studio Code"
 sudo -E sh -c 'apt-get update; apt-get install -y curl'
