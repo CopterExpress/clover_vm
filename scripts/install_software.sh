@@ -85,10 +85,10 @@ echo "--- Build PX4"
 cd ~/PX4-Autopilot
 make px4_sitl
 
-echo "--- Fix issues with finding mavlnk"
+echo "--- Build mavlink"
 cd ~/catkin_ws
-catkin_make mavlink_c_generate --pkg=px4
-ln -s "." build/mavlink/mavlink
+catkin_make mavlink_c_generate
+ln -s "." build/mavlink/mavlink  # fix https://github.com/PX4/PX4-Autopilot/pull/19964
 
 echo "--- Building the workspace"
 catkin_make
