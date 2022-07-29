@@ -61,7 +61,9 @@ ln -s ~/PX4-Autopilot/Tools/sitl_gazebo ~/catkin_ws/src/
 ln -s ~/PX4-Autopilot/mavlink ~/catkin_ws/src/
 
 echo "--- Installing PX4 dependencies"
+echo "progress=dot:giga" > ~/.wgetrc # make wget don't spam to log
 ~/PX4-Autopilot/Tools/setup/ubuntu.sh
+rm ~/.wgetrc
 pip3 install --user toml
 sudo -E sh -c 'apt-get install -y ant openjdk-11-jdk' # Additional packages for jMAVSim
 
