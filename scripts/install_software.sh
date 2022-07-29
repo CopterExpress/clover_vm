@@ -55,10 +55,11 @@ echo "--- Installing Clover's Python dependencies"
 sudo -E sh -c '/usr/bin/python3 -m pip install -r ~/catkin_ws/src/clover/clover/requirements.txt'
 
 echo "--- Downloading PX4"
-git clone --recursive --depth 1 --branch v1.12.3 https://github.com/PX4/PX4-Autopilot.git ~/PX4-Autopilot
+git clone --recursive --depth 1 --branch v1.13.0 https://github.com/PX4/PX4-Autopilot.git ~/PX4-Autopilot
 ln -s ~/PX4-Autopilot ~/catkin_ws/src/
 ln -s ~/PX4-Autopilot/Tools/sitl_gazebo ~/catkin_ws/src/
-ln -s ~/PX4-Autopilot/mavlink ~/catkin_ws/src/
+#ln -s ~/PX4-Autopilot/src/modules/mavlink/mavlink ~/catkin_ws/src/
+#git clone --depth 1 https://github.com/mavlink/c_library_v2.git ~/catkin_ws/src/mavlink/ # FIXME:
 
 echo "--- Installing PX4 dependencies"
 ~/PX4-Autopilot/Tools/setup/ubuntu.sh
@@ -80,9 +81,17 @@ ln -s ~/catkin_ws/src/clover/clover_simulation/airframes/* ~/PX4-Autopilot/ROMFS
 echo "--- Installing geographiclib datasets"
 sudo -E sh -c '/opt/ros/noetic/lib/mavros/install_geographiclib_datasets.sh'
 
-echo "--- Building the workspace"
+echo "--- Build PX4"
+cd ~/PX4-Autopilot
+make px4_sitl
+
+echo "--- Build mavlink"
 cd ~/catkin_ws
-catkin_make
+catkin_make mavlink_c_generate -DCATKIN_WHITELIST_PACKAGES="px4"  # at first build px4's mavlink to force mavlink_sitl_gazebo to use it
+ln -s "." build/mavlink/mavlink  # fix https://github.com/PX4/PX4-Autopilot/pull/19964
+
+echo "--- Building the workspace"
+catkin_make -DCATKIN_WHITELIST_PACKAGES=""
 
 echo "--- Installing Visual Studio Code"
 sudo -E sh -c 'apt-get update; apt-get install -y curl'
