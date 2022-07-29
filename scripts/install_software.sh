@@ -81,10 +81,6 @@ ln -s ~/catkin_ws/src/clover/clover_simulation/airframes/* ~/PX4-Autopilot/ROMFS
 echo "--- Installing geographiclib datasets"
 sudo -E sh -c '/opt/ros/noetic/lib/mavros/install_geographiclib_datasets.sh'
 
-echo "--- Build PX4"
-cd ~/PX4-Autopilot
-make px4_sitl
-
 echo "--- Build mavlink"
 cd ~/catkin_ws
 catkin_make mavlink_c_generate -DCATKIN_WHITELIST_PACKAGES="px4"  # at first build px4's mavlink to force mavlink_sitl_gazebo to use it
@@ -203,6 +199,13 @@ rosversion tf2_web_republisher
 rosversion cv_camera
 rosversion web_video_server
 rosversion nodelet
+
+echo "--- Validating PX4 builds"
+cd ~/PX4-Autopilot
+make px4_sitl  # regular sitl build
+sudo -E sh -c 'apt-get install -y gcc-arm-none-eabi'
+make px4_fmu-v4_default  # firmware build
+make clean
 
 echo "--- Run Clover's Python libraries validation"
 $HOME/catkin_ws/src/clover/builder/test/tests_py3.py
