@@ -58,8 +58,6 @@ echo "--- Downloading PX4"
 git clone --recursive --depth 1 --branch v1.13.0 https://github.com/PX4/PX4-Autopilot.git ~/PX4-Autopilot
 ln -s ~/PX4-Autopilot ~/catkin_ws/src/
 ln -s ~/PX4-Autopilot/Tools/sitl_gazebo ~/catkin_ws/src/
-#ln -s ~/PX4-Autopilot/src/modules/mavlink/mavlink ~/catkin_ws/src/
-#git clone --depth 1 https://github.com/mavlink/c_library_v2.git ~/catkin_ws/src/mavlink/ # FIXME:
 
 echo "--- Installing PX4 dependencies"
 ~/PX4-Autopilot/Tools/setup/ubuntu.sh
