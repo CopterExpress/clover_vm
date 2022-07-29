@@ -55,10 +55,9 @@ echo "--- Installing Clover's Python dependencies"
 sudo -E sh -c '/usr/bin/python3 -m pip install -r ~/catkin_ws/src/clover/clover/requirements.txt'
 
 echo "--- Downloading PX4"
-git clone --recursive --depth 1 --branch v1.12.3 https://github.com/PX4/PX4-Autopilot.git ~/PX4-Autopilot
+git clone --recursive --depth 1 --branch v1.13.0 https://github.com/PX4/PX4-Autopilot.git ~/PX4-Autopilot
 ln -s ~/PX4-Autopilot ~/catkin_ws/src/
 ln -s ~/PX4-Autopilot/Tools/sitl_gazebo ~/catkin_ws/src/
-ln -s ~/PX4-Autopilot/mavlink ~/catkin_ws/src/
 
 echo "--- Installing PX4 dependencies"
 echo "progress=dot:giga" > ~/.wgetrc # make wget don't spam to log
@@ -82,9 +81,13 @@ ln -s ~/catkin_ws/src/clover/clover_simulation/airframes/* ~/PX4-Autopilot/ROMFS
 echo "--- Installing geographiclib datasets"
 sudo -E sh -c '/opt/ros/noetic/lib/mavros/install_geographiclib_datasets.sh'
 
-echo "--- Building the workspace"
+echo "--- Build mavlink"
 cd ~/catkin_ws
-catkin_make
+catkin_make mavlink_c_generate -DCATKIN_WHITELIST_PACKAGES="px4"  # at first build PX4's mavlink to enforce mavlink_sitl_gazebo using it
+ln -s "." build/mavlink/mavlink  # fix https://github.com/PX4/PX4-Autopilot/pull/19964
+
+echo "--- Building the workspace"
+catkin_make -DCATKIN_WHITELIST_PACKAGES=""
 
 echo "--- Installing Visual Studio Code"
 sudo -E sh -c 'apt-get update; apt-get install -y curl'
@@ -197,6 +200,13 @@ rosversion cv_camera
 rosversion web_video_server
 rosversion nodelet
 
+echo "--- Validating PX4 builds"
+cd ~/PX4-Autopilot
+make px4_sitl  # regular sitl build
+sudo -E sh -c 'apt-get install -y gcc-arm-none-eabi'
+make px4_fmu-v4_default  # firmware build
+make clean
+
 echo "--- Run Clover's Python libraries validation"
 $HOME/catkin_ws/src/clover/builder/test/tests_py3.py
 
@@ -205,10 +215,10 @@ set +x
 rospack list-names | while read line; do echo $line `rosversion $line`; done
 set -x
 
-echo "Trying running the Gazebo simulator, check the output"
+echo "--- Trying running the Gazebo simulator, check the output"
 timeout --preserve-status 30 roslaunch clover_simulation simulator.launch gui:=false --screen
 
-echo "Trying running jMAVSim, check the output"
+echo "--- Trying running jMAVSim, check the output"
 # cd ~/PX4-Autopilot
 # HEADLESS=1 timeout --preserve-status 30 make px4_sitl jmavsim
 HEADLESS=1 timeout --preserve-status 30 roslaunch clover_simulation simulator.launch type:=jmavsim gui:=false --screen
