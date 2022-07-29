@@ -215,10 +215,10 @@ set +x
 rospack list-names | while read line; do echo $line `rosversion $line`; done
 set -x
 
-echo "Trying running the Gazebo simulator, check the output"
+echo "--- Trying running the Gazebo simulator, check the output"
 timeout --preserve-status 30 roslaunch clover_simulation simulator.launch gui:=false --screen
 
-echo "Trying running jMAVSim, check the output"
+echo "--- Trying running jMAVSim, check the output"
 # cd ~/PX4-Autopilot
 # HEADLESS=1 timeout --preserve-status 30 make px4_sitl jmavsim
 HEADLESS=1 timeout --preserve-status 30 roslaunch clover_simulation simulator.launch type:=jmavsim gui:=false --screen
