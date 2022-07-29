@@ -81,7 +81,7 @@ sudo -E sh -c '/opt/ros/noetic/lib/mavros/install_geographiclib_datasets.sh'
 
 echo "--- Build mavlink"
 cd ~/catkin_ws
-catkin_make mavlink_c_generate -DCATKIN_WHITELIST_PACKAGES="px4"  # at first build px4's mavlink to force mavlink_sitl_gazebo to use it
+catkin_make mavlink_c_generate -DCATKIN_WHITELIST_PACKAGES="px4"  # at first build PX4's mavlink to enforce mavlink_sitl_gazebo using it
 ln -s "." build/mavlink/mavlink  # fix https://github.com/PX4/PX4-Autopilot/pull/19964
 
 echo "--- Building the workspace"
