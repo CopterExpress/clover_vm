@@ -215,6 +215,10 @@ set +x
 rospack list-names | while read line; do echo $line `rosversion $line`; done
 set -x
 
+echo "--- Largest packages installed"
+sudo -E sh -c 'apt-get install -y debian-goodies'
+dpigs -H -n 30
+
 echo "--- Trying running the Gazebo simulator, check the output"
 timeout --preserve-status 30 roslaunch clover_simulation simulator.launch gui:=false --screen
 
