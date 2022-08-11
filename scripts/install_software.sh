@@ -64,7 +64,7 @@ echo "progress=dot:giga" > ~/.wgetrc # make wget don't spam to log
 ~/PX4-Autopilot/Tools/setup/ubuntu.sh --no-nuttx
 rm ~/.wgetrc
 pip3 install --user toml
-sudo -E sh -c 'apt-get install -y ant openjdk-11-jdk' # Additional packages for jMAVSim
+# sudo -E sh -c 'apt-get install -y ant openjdk-11-jdk' # Additional packages for jMAVSim
 
 echo "--- Patching mavlink_sitl_gazebo"
 # See https://github.com/PX4/PX4-SITL_gazebo/pull/872
