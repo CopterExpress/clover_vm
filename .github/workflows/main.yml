@@ -19,6 +19,8 @@ jobs:
           wget --progress=dot:giga https://clovervm.ams3.digitaloceanspaces.com/base-focal.ova -O output-virtualbox-iso/clover-devel.ova
       - name: Build
         run: ./build.sh
+      - name: Image size
+        run: ls -lh output-virtualbox-ovf
       - name: Upload
         if: ${{ github.event_name == 'release' }}
         # Not using ready S3 actions, because they either don't run on macOS machines or don't support changing the endpoint
