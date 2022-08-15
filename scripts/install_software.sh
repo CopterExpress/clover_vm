@@ -61,10 +61,10 @@ ln -s ~/PX4-Autopilot/Tools/sitl_gazebo ~/catkin_ws/src/
 
 echo "--- Installing PX4 dependencies"
 echo "progress=dot:giga" > ~/.wgetrc # make wget don't spam to log
-~/PX4-Autopilot/Tools/setup/ubuntu.sh
+~/PX4-Autopilot/Tools/setup/ubuntu.sh --no-nuttx
 rm ~/.wgetrc
 pip3 install --user toml
-sudo -E sh -c 'apt-get install -y ant openjdk-11-jdk' # Additional packages for jMAVSim
+# sudo -E sh -c 'apt-get install -y ant openjdk-11-jdk' # Additional packages for jMAVSim
 
 echo "--- Patching mavlink_sitl_gazebo"
 # See https://github.com/PX4/PX4-SITL_gazebo/pull/872
@@ -203,8 +203,8 @@ rosversion nodelet
 echo "--- Validating PX4 builds"
 cd ~/PX4-Autopilot
 make px4_sitl  # regular sitl build
-sudo -E sh -c 'apt-get install -y gcc-arm-none-eabi'
-make px4_fmu-v4_default  # firmware build
+# sudo -E sh -c 'apt-get install -y gcc-arm-none-eabi'
+# make px4_fmu-v4_default
 make clean
 
 echo "--- Run Clover's Python libraries validation"
@@ -214,6 +214,10 @@ echo "--- Versions of all installed ROS packages"
 set +x
 rospack list-names | while read line; do echo $line `rosversion $line`; done
 set -x
+
+echo "--- Largest packages installed"
+sudo -E sh -c 'apt-get install -y debian-goodies'
+dpigs -H -n 30
 
 echo "--- Trying running the Gazebo simulator, check the output"
 timeout --preserve-status 30 roslaunch clover_simulation simulator.launch gui:=false --screen
