@@ -199,7 +199,7 @@ rosversion tf2_web_republisher
 rosversion cv_camera
 rosversion web_video_server
 rosversion nodelet
-rosversion image-view
+rosversion image_view
 
 echo "--- Validating PX4 builds"
 cd ~/PX4-Autopilot
