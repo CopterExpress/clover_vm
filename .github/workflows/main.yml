@@ -34,5 +34,6 @@ jobs:
           sudo ln -s /usr/lib/x86_64-linux-gnu/libncursesw.so.6 /usr/lib/x86_64-linux-gnu/libncursesw.so.5
           ./VMware-ovftool-4.3.0-7948156-lin.x86_64.bundle --extract=ovftool
           ls ovftool
+          chmod +x ovftool/vmware-ovftool/ovftool ovftool/vmware-ovftool/ovftool.bin
       - name: Convert to Parallels
-        run: ovftool/ovftool --lax output-virtualbox-ovf/*.ova clover-devel.vmx && ls
+        run: ovftool/vmware-ovftool/ovftool --lax output-virtualbox-ovf/*.ova clover-devel.vmx && ls
