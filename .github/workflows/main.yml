@@ -30,6 +30,8 @@ jobs:
         working-directory: output-virtualbox-ovf
       - name: Install ovftool
         run: |
+          apt-get install -y libncurses-dev
+          sudo ln -s /usr/lib/x86_64-linux-gnu/libncursesw.so.6 /usr/lib/x86_64-linux-gnu/libncursesw.so.5
           ./VMware-ovftool-4.3.0-7948156-lin.x86_64.bundle --extract=ovftool
           ls ovftool
       - name: Convert to Parallels
