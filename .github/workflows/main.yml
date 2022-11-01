@@ -30,7 +30,7 @@ jobs:
         working-directory: output-virtualbox-ovf
       - name: Install ovftool
         run: |
-          ./VMware-ovftool-4.3.0-7948156-lin.x86_64.bundle --extract ovftool
+          ./VMware-ovftool-4.3.0-7948156-lin.x86_64.bundle --extract=ovftool
           ls ovftool
       - name: Convert to Parallels
         run: ovftool/ovftool --lax output-virtualbox-ovf/*.ova clover-devel.vmx && ls
