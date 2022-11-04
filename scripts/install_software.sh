@@ -89,6 +89,9 @@ ln -s "." build/mavlink/mavlink  # fix https://github.com/PX4/PX4-Autopilot/pull
 echo "--- Building the workspace"
 catkin_make -DCATKIN_WHITELIST_PACKAGES=""
 
+echo "--- Running tests"
+catkin_make run_tests && catkin_test_results
+
 echo "--- Installing Visual Studio Code"
 sudo -E sh -c 'apt-get update; apt-get install -y curl'
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > ${HOME}/packages.microsoft.gpg
