@@ -185,7 +185,6 @@ pip --version
 pip3 --version
 monkey --version
 systemctl --version
-# TODO: add Python tests
 
 roscore -h
 rosversion px4
@@ -212,6 +211,7 @@ make px4_sitl  # regular sitl build
 make clean
 
 echo "--- Run Clover's Python libraries validation"
+$HOME/catkin_ws/src/clover/builder/test/tests.py
 $HOME/catkin_ws/src/clover/builder/test/tests_py3.py
 
 echo "--- Versions of all installed ROS packages"
