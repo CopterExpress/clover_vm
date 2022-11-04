@@ -29,6 +29,6 @@ jobs:
           echo Uploaded https://clovervm.ams3.digitaloceanspaces.com/$(ls)
         working-directory: output-virtualbox-ovf
       - name: Install ovftool
-        run: installer -pkg "VMware OVF Tool.pkg" -target /
+        run: sudo installer -pkg "VMware OVF Tool.pkg" -target /
       - name: Convert to Parallels
         run: /Applications/VMware\ OVF\ Tool/ovftool --lax output-virtualbox-ovf/*.ova clover-devel.vmx && ls
