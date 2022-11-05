@@ -212,6 +212,7 @@ make clean
 
 echo "--- Run Clover's Python and shell tests"
 source ~/catkin_ws/devel/setup.bash
+export VM=1
 $HOME/catkin_ws/src/clover/builder/test/tests.py
 $HOME/catkin_ws/src/clover/builder/test/tests_py3.py
 $HOME/catkin_ws/src/clover/builder/test/tests.sh
