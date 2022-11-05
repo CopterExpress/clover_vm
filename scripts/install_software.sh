@@ -210,10 +210,11 @@ make px4_sitl  # regular sitl build
 # make px4_fmu-v4_default
 make clean
 
-echo "--- Run Clover's Python libraries validation"
+echo "--- Run Clover's Python and shell tests"
 source ~/catkin_ws/devel/setup.bash
 $HOME/catkin_ws/src/clover/builder/test/tests.py
 $HOME/catkin_ws/src/clover/builder/test/tests_py3.py
+$HOME/catkin_ws/src/clover/builder/test/tests.sh
 
 echo "--- Versions of all installed ROS packages"
 set +x
