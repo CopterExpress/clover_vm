@@ -211,6 +211,7 @@ make px4_sitl  # regular sitl build
 make clean
 
 echo "--- Run Clover's Python libraries validation"
+source ~/catkin_ws/devel/setup.bash
 $HOME/catkin_ws/src/clover/builder/test/tests.py
 $HOME/catkin_ws/src/clover/builder/test/tests_py3.py
 
