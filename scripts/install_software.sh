@@ -89,6 +89,9 @@ ln -s "." build/mavlink/mavlink  # fix https://github.com/PX4/PX4-Autopilot/pull
 echo "--- Building the workspace"
 catkin_make -DCATKIN_WHITELIST_PACKAGES=""
 
+echo "--- Running tests"
+catkin_make run_tests && catkin_test_results
+
 echo "--- Installing Visual Studio Code"
 sudo -E sh -c 'apt-get update; apt-get install -y curl'
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > ${HOME}/packages.microsoft.gpg
@@ -151,7 +154,7 @@ sudo cp ${HOME}/catkin_ws/src/clover/builder/assets/monkey.service /etc/systemd/
 sudo systemctl enable monkey
 
 echo "--- Installing additional packages"
-sudo -E sh -c 'apt-get update; apt-get install -y sshfs gvfs-fuse gvfs-backends python3-opencv byobu ipython3 byobu nmap lsof tmux vim ros-noetic-rqt-multiplot ros-noetic-image-view'
+sudo -E sh -c 'apt-get update; apt-get install -y sshfs gvfs-fuse gvfs-backends python3-opencv byobu ipython3 byobu nmap lsof tmux vim ros-noetic-usb-cam ros-noetic-rqt-multiplot ros-noetic-image-view'
 
 echo "--- Personalizing VM"
 sudo -E sh -c 'cp /usr/share/xfce4/backdrops/xubuntu-wallpaper.png /usr/share/xfce4/backdrops/xubuntu-wallpaper-old.png; cp ${HOME}/Pictures/Logo_COEX_2019_white_on_black.png /usr/share/xfce4/backdrops/xubuntu-wallpaper.png'
@@ -182,7 +185,6 @@ pip --version
 pip3 --version
 monkey --version
 systemctl --version
-# TODO: add Python tests
 
 roscore -h
 rosversion px4
@@ -208,8 +210,12 @@ make px4_sitl  # regular sitl build
 # make px4_fmu-v4_default
 make clean
 
-echo "--- Run Clover's Python libraries validation"
+echo "--- Run Clover's Python and shell tests"
+source ~/catkin_ws/devel/setup.bash
+export VM=1
+$HOME/catkin_ws/src/clover/builder/test/tests.py
 $HOME/catkin_ws/src/clover/builder/test/tests_py3.py
+$HOME/catkin_ws/src/clover/builder/test/tests.sh
 
 echo "--- Versions of all installed ROS packages"
 set +x
