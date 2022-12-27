@@ -55,7 +55,7 @@ echo "--- Installing Clover's Python dependencies"
 sudo -E sh -c '/usr/bin/python3 -m pip install -r ~/catkin_ws/src/clover/clover/requirements.txt'
 
 echo "--- Downloading PX4"
-git clone --recursive --depth 1 --branch v1.13.0 https://github.com/PX4/PX4-Autopilot.git ~/PX4-Autopilot
+git clone --recursive --depth 1 --branch v1.13.2 https://github.com/PX4/PX4-Autopilot.git ~/PX4-Autopilot
 ln -s ~/PX4-Autopilot ~/catkin_ws/src/
 ln -s ~/PX4-Autopilot/Tools/sitl_gazebo ~/catkin_ws/src/
 
