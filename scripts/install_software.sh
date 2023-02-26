@@ -166,8 +166,14 @@ chmod a+x ${HOME}/Desktop/*
 echo "--- Disable sleeping mode"
 xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/blank-on-ac -s 0
 xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/blank-on-battery -s 0
+xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/dpms-on-ac-off -s 0
+xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/dpms-on-ac-sleep -s 0
+xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/dpms-on-battery-off -s 0
+xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/dpms-on-battery-sleep -s 0
 xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/inactivity-sleep-mode-on-ac -s 0
 xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/inactivity-sleep-mode-on-battery -s 0
+xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/dpms-enabled -s false
+xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/lock-screen-suspend-hibernate -s false
 
 echo "--- Creating /etc/clover_vm_version"
 sudo -E sh -c 'mv /tmp/clover_vm_version /etc/clover_vm_version'
