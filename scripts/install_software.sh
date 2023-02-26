@@ -163,6 +163,12 @@ sudo -E sh -c 'hostnamectl set-hostname clover-dev; sed -i "s/ubuntu/clover-dev 
 echo "export ROS_HOSTNAME=\`hostname\`.local" >> ${HOME}/.bashrc
 chmod a+x ${HOME}/Desktop/*
 
+echo "--- Disable sleeping mode"
+xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/blank-on-ac -s 0
+xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/blank-on-battery -s 0
+xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/inactivity-sleep-mode-on-ac -s 0
+xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/inactivity-sleep-mode-on-battery -s 0
+
 echo "--- Creating /etc/clover_vm_version"
 sudo -E sh -c 'mv /tmp/clover_vm_version /etc/clover_vm_version'
 cat /etc/clover_vm_version
